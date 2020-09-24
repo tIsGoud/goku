@@ -1,0 +1,325 @@
+{
+    ;; !  | means mandatory -   modifier(s) alone when pressend change behavior
+    ;; #  | means optional  -   modifiers are optional (but atleast one necessary)
+
+    ;; :!Ca is keycode :a and prefix a with !C
+
+    ;; C  | left_command
+    ;; T  | left_control
+    ;; O  | left_option
+    ;; S  | left_shift
+    ;; F  | fn
+    ;; Q  | right_command
+    ;; W  | right_control
+    ;; E  | right_option
+    ;; R  | right_shift
+
+    ;; ## | optional any
+    ;; !! | command + control + optional + shift (hyper)
+
+    ;; Install via brew: `brew install yqrashawn/goku/goku`
+
+    ;; karabiner docs: ;; https://pqrs.org/osx/karabiner/json.html#complex_modifications-manipulator-definition
+    ;; <other options> includs ~to_if_alone~, ~to_if_held_down~,~to_after_key_up~, ~to_delayed_action~ and ~parameters~.
+
+    ;; (custom variables) & modifiers -> Advanced
+    ;; https://github.com/yqrashawn/GokuRakuJoudo/blob/master/examples.org#custom-variable
+
+    ;; Examples: https://github.com/yqrashawn/GokuRakuJoudo/blob/master/examples.org
+    ;; https://gist.github.com/kaushikgopal/ff7a92bbc887e59699c804b59074a126
+    ;; https://github.com/kchen0x/k-goku/blob/master/karabiner.edn
+
+:profiles {
+    :Default { :default true
+        :sim     50     ;; simultaneous_threshold_milliseconds (def: 50)
+                        ;; keys need to be pressed within this threshold to be considered simultaneous
+        :delay   500    ;; to_delayed_action_delay_milliseconds (def: 500)
+                        ;; basically it means time after which the key press is count delayed
+        :alone   500    ;; to_if_alone_timeout_milliseconds (def: 1000)
+                        ;; hold for 995s and single tap registered; hold for 1005s and seen as modifier
+        :held    1000   ;; to_if_held_down_threshold_milliseconds (def: 500)
+                        ;; key is fired twice when 500 ms is elapsed (otherwise seen as a hold command)
+    }
+} ;; profiles
+
+:templates {
+    :open "open -a '%s'"                                ;; :open "Safari"
+    :openApp "open \"%s\""                              ;; :open "/Applications/Safari.app"
+    :applescript "osascript '/Users/albert/Library/Mobile Documents/com~apple~ScriptEditor2/Documents/%s'"
+                                                        ;; 'path to user's 'iCloud Drive/Script Editor',
+                                                        ;; '~' can not be used for the users home directory
+} ;; templates
+
+:applications {                                         ;; Get the app id: `osascript -e 'id of app "VSCodium"'`
+    :chrome ["^com\\.google\\.Chrome$"]
+    :safari ["^com\\.apple\\.Safari$"]
+    :firefox ["^org\\.mozilla\\.firefoxdeveloperedition$"]
+    :finder ["^com\\.apple\\.finder$"]
+    :vscodium ["^com\\.visualstudio\\.code\\.oss$"]
+}
+
+;; layers are basically "hyper" keys
+;; press this in combination with something else and depending on your rule, make things happen
+:layers {
+    :hyper-mode {:key :caps_lock :alone {:key :escape}} ;; make the caps_lock key the hyper key
+                                                        ;; In "System Preferences/Keyboard/Modifier Keys..."
+                                                        ;; the Caps Lock Key is set to "No Action".
+} ;; layers
+
+;; simlayers are basically "hyper" keys
+;; layers works too, but only recommended for non-typing keys like . or tab
+;; or keys like z which are used less often
+:simlayers {
+    :e-mode {:key :e}                                   ;; make the e-key a simlayer key
+    :o-mode {:key :o}                                   ;; make the o-key a simlayer key
+    :space-mode {:key :spacebar}                        ;; make the spacebar a simlayer key
+} ;; simlayers
+
+;; Define different kinds of keyboards
+:devices {
+    :kb-apple [
+        {:vendor_id 1452}                               ;; product_id 636 for MacBook Pro (15-inch, 2018) internal keyboard
+        {:vendor_id 76}
+    ]
+    :magicforce68 [                                     ;; Qisan Magicforce 68 keyboard without backlight
+        {:vendor_id 1241,
+         :product_id 41208 }]
+    :magicforce68-backlight                             ;; Qisan Magicforce 68 keyboard with backlight
+       [{:vendor_id 1241,
+         :product_id 36 }]
+
+    :kb-all [                                           ;; Group with all keyboards
+        {:vendor_id 1452}
+        {:vendor_id 76}
+        {:vendor_id 1241, :product_id 36 }
+        {:vendor_id 1241, :product_id 41208 }
+    ]
+
+    :kb-magicforce68 [                                  ;; Group with Magicforce 68-key keyboards
+        {:vendor_id 1241, :product_id 36 }
+        {:vendor_id 1241, :product_id 41208 }
+    ]
+} ;; devices
+
+;; main contains multiple manipulators
+:main [
+    ;; each manipulator has a description and multiple rules
+
+    ;;{:des "..."                                       ;; -> description
+    ;; :rules[
+    ;;          [<from>  <to>  <conditions>]            ;; -> rule 1
+    ;;          [<from>  <to>  <conditions>]            ;; -> rule 2
+    ;; ]}
+
+    ;; rule [:period ["period-mode" 1] nil {:afterup ["period-mode" 0] :alone :period}]
+    ;;       |_____| |_______________| |_| |_________________________________________|
+    ;;        <from>    <to>      <conditions>         <other options>
+
+    ;; Tab is set to F18 as hyperkey for Hammerspoon, alone it acts as tab.
+    {:des "Tab to F18/Tab, trigger for Hyperspoon, ehh Hammerspoon"
+     :rules [
+        [:##tab :f18 nil {:alone :tab}]
+     ]
+    }
+
+    ;; The Magicforce keyboards have a PC layout, I swapped the Windows- and Alt-key on the left side.
+    ;; Swapping the physical keys and virtually in karabiner-elements make the layout behave like a Mac keyboard.
+    ;; It does require extra rules for combinations with other modifier keys.
+    ;; This is the simplified version of the keycombinations below, so without the 'alone' functionality.
+    ; {:des "Magicforce68 - swap left-option and left-command"
+    ;  :rules [ :kb-magicforce68
+    ;     [:##left_command :left_option]
+    ;     [:##left_option :left_command]
+    ;     [:!Sleft_option :!Sleft_command]                ;; fix for shift_option
+    ;     [:!Sleft_command :!Sleft_option]                ;; fix for shift_command
+    ;     [:!Tleft_option :!Tleft_command]                ;; fix for control_option
+    ;     [:!Tleft_command :!Tleft_option]                ;; fix for control_command
+    ;  ]
+    ; }
+
+    ;; The Magicforce keyboards have a PC layout, I swapped the Windows- and Alt-key on the left side.
+    ;; Swapping the physical keys and virtually in karabiner-elements make the layout behave like a Mac keyboard.
+    ;; Additional shortcut for command+tab to switch between the current and previous application
+    ;; Additional shortcut for command+tilde to cycle through the open windows of an application
+    ;; It does require extra rules for combinations with other modifier keys.
+    {:des "Magicforce68 - swap left-option and -command and add cmd-tilde and cmd-tab to the standalone keys"
+     :rules [ :kb-magicforce68
+        [:left_command :left_option nil {:alone [:!Cgrave_accent_and_tilde]}]
+        [:left_option :left_command nil {:alone [:!Ctab]}]
+        [:!Sleft_option :!Sleft_command]                ;; fix for shift_option
+        [:!Sleft_command :!Sleft_option]                ;; fix for shift_command
+        [:!Tleft_option :!Tleft_command]                ;; fix for control_option
+        [:!Tleft_command :!Tleft_option]                ;; fix for control_command
+     ]
+    }
+
+    ;; The Magicforce is a 68 key keyboard with a combined escape_grave_accent_and_tilde key.
+    ;; Capslock alone is set to behave like the Escape-key, with this setting the key is
+    ;; forced to tilde and grave-accent.
+    ;; Additional rule required for command-tilde behaviour.
+    ;; Note: On the backlight version there is an override with Fn-Q.
+    {:des "Magicforce68 - set escape to grave_accent_and_tilde"
+     :rules [ :kb-magicforce68
+        [:escape :grave_accent_and_tilde]
+        [:!Cescape :!Cgrave_accent_and_tilde]
+     ]
+    }
+
+    ;; The function key on Apple keyboards can be used in Karabiner,
+    ;; it does not work for the function key on my Qisan-Magicfoce keyboard.
+    {:des "Apple keyboard - fn + l to Lock-screen, fn + s to Sleep"
+     :rules [ :kb-apple
+        [:!Fl [:!CTq]]                                  ;; Function + l to Lock Screen (Command-Control-Q)
+        [:!Fs [:!COeject]]                              ;; Function + s to Sleep (Command-Option-Eject)
+     ]
+    }
+
+    ;; Shortcut `command` for command+tab to switch between the current and previous application
+    ;; Shortcut `option` for command+tilde to cycle through the open windows of an application
+    ;; Shortcut `control` for control+tab to go to the next tab in most applications
+    ;; Due to the switched left-option and -command on the Magicforce keyboard, two rules are excluded.
+    ;; Functonality for the left-option and left-command is handled in the Magicforce specific rules.
+    ;; Command-tab s not implemented in the same way across applications. This results either in looping
+    ;; through the tabs or toggling between two tabs. To create the same experience everywhere specific
+    ;; sequences need to be build. For VSCodium I experimented with with Ctrl+tab twice.
+    {:des "Change command to cmd+tab, option to cmd+tilde and control to ctrl+tab when pressed `alone`"
+     :rules [
+        [:##left_command :left_command [:!kb-magicforce68] {:alone [:!Ctab]}]
+        [:##left_option :left_option [:!kb-magicforce68] {:alone [:!Cgrave_accent_and_tilde]}]
+        [:##left_control :left_control [:!vscodium] {:alone [:!Ttab]}]
+        [:##left_control :left_control [:vscodium] {:alone [:!Ttab :!Ttab]}]
+        [:##right_command :right_command nil {:alone [:!Ctab]}]
+        [:##right_option :right_option nil {:alone [:!Cgrave_accent_and_tilde]}]
+        [:##right_control :right_control [:!vscodium] {:alone [:!Wtab]}]
+        [:##right_control :right_control [:vscodium] {:alone [:!Wtab :!Wtab]}]
+     ]
+    }
+
+    ;; Use the left and right shift-key to move the cursor one word left or right.
+    {:des "Left- and right- shiftkeys: move the cursor one word"
+     :rules [
+        [:##left_shift :left_shift nil {:alone :!Oleft_arrow }]
+        [:##right_shift :right_shift nil {:alone :!Eright_arrow}]
+     ]
+    }
+
+    ;; Use e-key key to launch apps or actions
+    {:des "e-key shortcuts"                             ; Hold 'e' + extra key
+     :rules [ :e-mode
+        [:m [:!TCspacebar]]                             ; 'm' - Emoji picker
+     ]
+    }
+
+    ;; Use o-key to launch apps or actions
+    ;; Mostly as example
+    {:des "o-key shortcuts (example)"                   ; Hold 'o' + extra key
+     :rules [ :o-mode
+        [:s [:open "Safari"]]                           ; 's' - Open Safari
+     ]
+    }
+
+    ;; Use spacebar to launch apps or actions
+    ;; Mostly as example
+    {:des "Spacebar shortcuts (example)"                ; Hold 'space' + extra key
+     :rules [ :space-mode
+        [:slash [:open "Finder"]]                       ; '/' - Open Finder
+        [:p [:open "Preview"]]                          ; 'p' - Open Preview
+     ]
+    }
+
+    ;; Use caps_lock key to launch apps or actions
+    {:des "Hyper-mode shortcuts"                        ; Hold 'caps_lock' + extra key
+     :rules [ :hyper-mode
+        [:l [:!CTq]]                                    ; 'l' - Lock Screen
+        [:m [:!TCspacebar]]                             ; 'm' - Emoji picker
+        [:slash [:open "Finder"]]                       ; '/' - Open Finder
+        [:p [:open "Preview"]]                          ; 'p' - Open Preview
+        [:s [:open "Safari"]]                           ; 's' - Open Safari
+        [:f [:open "Firefox Developer Edition"]]        ; 'f' - Open Firefox
+        [:k [:open "Kubernetic"]]                       ; 'k' - Open Kubernetic
+        [:g [:open "Google Chrome"]]                    ; 'g' - Open Google Chrome
+        [:c [:open "iTerm"]]                            ; 'c' - Open iTerm 'console' or 'commandline'
+        [:t [:open "Typora"]]                           ; 't' - Open Typora
+        [:v [:open "VSCodium"]]                         ; 'v' - Open VSCodium
+        [:4 [:!TSC4]]                                   ; '4' - Screenshot to clipboard
+        [:5 [:!SC5]]                                    ; '5' - Screenshot and recording options
+     ]
+    }
+
+    ;; Borrowed and modified from kchen0x/k-goku, interesting feature, not sure how and when to use it.
+    ;; Hyperkey (caps_lock) + arrow key to move the cursor
+    ;; Hyperkey (caps_lock) + shift + arrow key to move the cursor at half the speed
+    ;; Hyperkey (caps_lock) + left_shift + left_control + arrow key to move the cursor at quarter the speed
+    ;; Hyperkey + return for mouse button 1
+    ;; Hyperkey + command + return for mouse button 2
+    {:des "Hyper Mode mousekey movement (left_shift or left_shift + left_control reduce the speed)"
+     :rules [ :hyper-mode
+        [:down_arrow {:mkey {:y 1200}}]
+        [:up_arrow {:mkey {:y -1200}}]
+        [:left_arrow {:mkey {:x -1200}}]
+        [:right_arrow {:mkey {:x 1200}}]
+        [:!Sdown_arrow {:mkey {:y 600}}]
+        [:!Sup_arrow {:mkey {:y -600}}]
+        [:!Sleft_arrow {:mkey {:x -600}}]
+        [:!Sright_arrow {:mkey {:x 600}}]
+        [:!TSdown_arrow {:mkey {:y 300}}]
+        [:!TSup_arrow {:mkey {:y -300}}]
+        [:!TSleft_arrow {:mkey {:x -300}}]
+        [:!TSright_arrow {:mkey {:x 300}}]
+        [:return_or_enter {:pkey :button1}]
+        [:!Creturn_or_enter {:pkey :button2}]
+     ]
+    }
+
+    ;; Borrowed from kchen0x/k-goku, interesting feature, not sure if I want to use it.
+    ; {:des "Quit application by pressing command-q twice"
+    ;  :rules [[:!C#Pq [:!Cq ["command-q" 0]] ["command-q" 1]]
+    ;          [:!C#Pq ["command-q" 1] nil {:delayed {:invoked ["command-q" 0] :canceled ["command-q" 0]}}]
+    ;  ]
+    ; }
+
+    ;; Attempt to do a double tap with the left-control key. Double tap works but control-c fails.
+    ;; Double tap the left-control to bring up the emoji-picker.
+    ; {:des "Open emoji-picker by pressing left-control twice"
+    ;  :rules [
+    ;     [:##left_control [:!TCspacebar  ["left_control_twice" 0]] ["left_control_twice" 1]]
+    ;     [:##left_control ["left_control_twice" 1] ["left_control_twice" 0]
+    ;       {:delayed {:invoked [:left_control ["left_control_twice" 0]] :canceled ["left_control_twice" 0]} :held [:##left_control]}
+    ;     ]
+    ;  ]
+    ; }
+
+    ;; Browser specific: save all tabs to a markdown file.
+    ;; Option + 'o' saves all tabs to a MarkDown file
+    ;; Info on the used AppleScript: "https://tisgoud.nl/2020/04/saving-the-yak-browser-trail/"
+    ;; and some fun examples
+    {:des "Safari: run script to save tabs to markdown (left-option + 'o')"
+     :rules [ :safari
+        [:!Os [:applescript "SaveSafariTabsToMarkdown.scpt"]]
+                                                        ;; Examples of other possible functions
+        [:!Oa "say 'now we are in Safari'"]
+        [:!Of ["osascript -e 'tell app \"Finder\" to make new Finder window'"]]
+        [:!Oh ["osascript -e 'display dialog \"Hello from Karabiner-elements\" with title \"This must be Safari!\"'"]]
+     ]
+    }
+
+    ;; Browser specific: save all tabs to a markdown file.
+    ;; Option + 'o' saves all tabs to a MarkDown file
+    ;; Info on the used AppleScript: "https://tisgoud.nl/2020/04/saving-the-yak-browser-trail/"
+    {:des "Google Chrome: run script to save tabs to markdown (left-option + 'o')"
+     :rules [ :chrome
+        [:!Os [:applescript "SaveChromeTabsToMarkdown.scpt"]]
+     ]
+    }
+
+    ;; Finder specific: open selected file or directory in VSCodium.
+    ;; Info on the used AppleScript: "https://tisgoud.nl/2019/09/open-in-vscodium/"
+    {:des "Finder: run script to open selected file or directory in VSCodium (right-option + 'o')"
+     :rules [ :finder
+        [:!Eo [:applescript "Open in VSCodium.scpt"]]   ;; right_option + 'o' to open the file or folder in VSCodium
+     ]
+    }
+
+] ;; main
+
+} ;; EOF
