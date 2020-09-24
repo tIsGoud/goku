@@ -1,3 +1,3 @@
 # My Goku / Karabiner configuration
 
-TODO: Addreference to blogpost(s)
+TODO: Add reference to blogpost(s) and add more context 

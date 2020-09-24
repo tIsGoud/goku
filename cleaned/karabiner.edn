@@ -80,6 +80,7 @@
     :kb-apple [
         {:vendor_id 1452}                               ;; product_id 636 for MacBook Pro (15-inch, 2018) internal keyboard
         {:vendor_id 76}
+    ]
 } ;; devices
 
 ;; main contains multiple manipulators
