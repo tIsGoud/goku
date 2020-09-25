@@ -22,7 +22,7 @@ The following sections give an overview of the shortcuts, mappings and automatio
 The specific settings for my compact Qisan Magicforce68 keyboard
 
 | Shortcut         | Keystroke      | Function                        |
-| ---------------- | ---------------| ------------------------------- |
+| :--------------- | :--------------| :------------------------------ |
 | left-option      | left-&#x2318;  | swapping option and command     |
 | left-command     | left-&#x2325;  | swapping command and option     |
 | Escape           | \`             | Escape to \`                    |
@@ -37,7 +37,7 @@ This section is removed in the cleaned version.
 The specific Apple keyboard setting involve the use of the 'fn' or function key. I was unable to address the function key on my Qisan keyboard.
 
 | Shortcut | Keystroke                   | Function    |
-| -------- | --------------------------- | ----------- |
+| :------- | :-------------------------- | :---------- |
 | fn + l   | &#x2318; + &#x2303; + q     | Lock screen |
 | fn + s   | &#x2318; + &#x2325; + Eject | Sleep       |
 
@@ -46,7 +46,7 @@ The specific Apple keyboard setting involve the use of the 'fn' or function key.
 You might wonder why there are 5 hyper-keys, yes it is to much but I'm still figuring out which hyperkey location is most convenient. The position of your hands above the keyboard is an important factor in this. Using the capslock as hyper key is also a good option due to the size of the key.
 
 | Shortcut         | Keystroke                   | Function                         |
-| ---------------- | --------------------------- | -------------------------------- |
+| :--------------- | :-------------------------- | :------------------------------- |
 | Capslock         | Escape                      | hyper-key                        |
 | Tab              | Tab / fn18                  | Hammerspoon hyper-key            |
 | e                | e                           | hyper-key                        |
