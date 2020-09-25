@@ -177,8 +177,8 @@
         [:f [:open "Firefox Developer Edition"]]        ; 'f' - Open Firefox
         [:k [:open "Kubernetic"]]                       ; 'k' - Open Kubernetic
         [:g [:open "Google Chrome"]]                    ; 'g' - Open Google Chrome
-        [:c [:open "iTerm"]]                            ; 'c' - Open iTerm 'console' or 'commandline'
-        [:t [:open "Typora"]]                           ; 't' - Open Typora
+        [:t [:open "iTerm"] [:!code]]                   ; 't' - Open iTerm 'console' or 'commandline'
+        [:y [:open "Typora"]]                           ; 'y' - Open Typora
         [:v [:open "VSCodium"]]                         ; 'v' - Open VSCodium
         [:4 [:!TSC4]]                                   ; '4' - Screenshot to clipboard
         [:5 [:!SC5]]                                    ; '5' - Screenshot and recording options
@@ -256,6 +256,14 @@
     {:des "Finder: run script to open selected file or directory in VSCodium (right-option + 'o')"
      :rules [ :finder
         [:!Eo [:applescript "Open in VSCodium.scpt"]]   ;; right_option + 'o' to open the file or folder in VSCodium
+     ]
+    }
+
+    ;; Use caps_lock key to launch apps or actions in VSCode/VSCodium
+    ;; When the same keycode is used as general rule/shortcut, '!code' is required on the original rule
+    {:des "VSCode/VSCodium shortcuts"                   ; Hold 'caps_lock' + extra key
+     :rules [ :code :hypermode
+        [:t [:!TSgrave_accent_and_tilde]]               ; 't' - Open terminal
      ]
     }
 

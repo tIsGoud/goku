@@ -323,7 +323,7 @@
     ;; Use caps_lock key to launch apps or actions in VSCode/VSCodium
     ;; When the same keycode is used as general rule/shortcut, '!code' is required on the original rule
     {:des "VSCode/VSCodium shortcuts"                   ; Hold 'caps_lock' + extra key
-     :rules [ :code
+     :rules [ :code :hyper-mode
         [:t [:!TSgrave_accent_and_tilde]]               ; 't' - Open terminal
      ]
     }

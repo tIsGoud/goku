@@ -58,4 +58,22 @@ You might wonder why there are 5 hyper-keys, yes it is to much but I'm still fig
 | right-Option + o |                             | Finder: Open in VSCodium         |
 | Capslock + t     |                             | VSCodium: New Terminal           |
 
+## Run Goku -c
+
+When the 'karabiner.edn' file is not located in the directory '~/.config' you can run the shell script 'gokuc.sh' which uses the config file from the current directory.
+
+```shell
+#!/bin/bash
+
+# Run goku with the karabiner.edn file from the current directory
+goku -c $PWD"/karabiner.edn"
+```
+
+Output:
+
+```shell
+goku$ ./gokuc.sh
+Done!
+```
+
 -=EOF=-
