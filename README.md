@@ -68,8 +68,8 @@ You might wonder why there are 5 hyper-keys, yes it is to much but I'm still fig
 | Capslock + f     |                             | Open Firefox                     |
 | Capslock + k     |                             | Open Kubernetic                  |
 | Capslock + g     |                             | Open Google Chrome               |
-| Capslock + c     |                             | Open iTerm                       |
-| Capslock + t     |                             | Open Typora                      |
+| Capslock + t     |                             | Open iTerm                       |
+| Capslock + y     |                             | Open Typora                      |
 | Capslock + v     |                             | Open VSCodium                    |
 | Capslock + 4     |                             | Screenshot to clipboard          |
 | Capslock + 5     |                             | Screenshot and recording options |
@@ -77,5 +77,6 @@ You might wonder why there are 5 hyper-keys, yes it is to much but I'm still fig
 | left-Option + s  |                             | Safari: Save tabs to markdown    |
 | left-Option + s  |                             | Chrome: Save tabs to markdown    |
 | right-Option + o |                             | Finder: Open in VSCodium         |
+| Capslock + t     |                             | VSCodium: Open terminal          |
 
 -=EOF=-
