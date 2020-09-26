@@ -110,5 +110,3 @@ Output:
 goku$ ./gokuc.sh
 Done!
 ```
-
--=EOF=-
