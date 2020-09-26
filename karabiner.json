@@ -340,7 +340,7 @@
             "key_code" : "left_control"
           } ],
           "conditions" : [ {
-            "bundle_identifiers" : [ "^com\\.visualstudio\\.code\\.oss$" ],
+            "bundle_identifiers" : [ "^com\\.visualstudio\\.code\\.oss$", "^com\\.microsoft\\.VSCode(Insiders)?$", "^com\\.microsoft\\.VSCode?$" ],
             "type" : "frontmost_application_unless"
           } ],
           "type" : "basic"
@@ -362,7 +362,7 @@
             "key_code" : "left_control"
           } ],
           "conditions" : [ {
-            "bundle_identifiers" : [ "^com\\.visualstudio\\.code\\.oss$" ],
+            "bundle_identifiers" : [ "^com\\.visualstudio\\.code\\.oss$", "^com\\.microsoft\\.VSCode(Insiders)?$", "^com\\.microsoft\\.VSCode?$" ],
             "type" : "frontmost_application_if"
           } ],
           "type" : "basic"
@@ -411,7 +411,7 @@
             "key_code" : "right_control"
           } ],
           "conditions" : [ {
-            "bundle_identifiers" : [ "^com\\.visualstudio\\.code\\.oss$" ],
+            "bundle_identifiers" : [ "^com\\.visualstudio\\.code\\.oss$", "^com\\.microsoft\\.VSCode(Insiders)?$", "^com\\.microsoft\\.VSCode?$" ],
             "type" : "frontmost_application_unless"
           } ],
           "type" : "basic"
@@ -433,7 +433,7 @@
             "key_code" : "right_control"
           } ],
           "conditions" : [ {
-            "bundle_identifiers" : [ "^com\\.visualstudio\\.code\\.oss$" ],
+            "bundle_identifiers" : [ "^com\\.visualstudio\\.code\\.oss$", "^com\\.microsoft\\.VSCode(Insiders)?$", "^com\\.microsoft\\.VSCode?$" ],
             "type" : "frontmost_application_if"
           } ],
           "type" : "basic"
@@ -554,6 +554,186 @@
               "key_code" : "o"
             }, {
               "key_code" : "s"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "o-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "t"
+          },
+          "to" : [ {
+            "shell_command" : "osascript -e 'tell application \"System Events\" to keystroke \"Moi,oet Grunn!\" as text'"
+          } ],
+          "conditions" : [ {
+            "name" : "o-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 250
+          },
+          "to" : [ {
+            "shell_command" : "osascript -e 'tell application \"System Events\" to keystroke \"Moi,oet Grunn!\" as text'"
+          }, {
+            "set_variable" : {
+              "name" : "o-mode",
+              "value" : 1
+            }
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "o"
+            }, {
+              "key_code" : "t"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "o-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "b"
+          },
+          "to" : [ {
+            "shell_command" : "osascript -e 'beep'"
+          } ],
+          "conditions" : [ {
+            "name" : "o-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 250
+          },
+          "to" : [ {
+            "shell_command" : "osascript -e 'beep'"
+          }, {
+            "set_variable" : {
+              "name" : "o-mode",
+              "value" : 1
+            }
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "o"
+            }, {
+              "key_code" : "b"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "o-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "p"
+          },
+          "to" : [ {
+            "shell_command" : "afplay /System/Library/Sounds/Purr.aiff"
+          } ],
+          "conditions" : [ {
+            "name" : "o-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 250
+          },
+          "to" : [ {
+            "shell_command" : "afplay /System/Library/Sounds/Purr.aiff"
+          }, {
+            "set_variable" : {
+              "name" : "o-mode",
+              "value" : 1
+            }
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "o"
+            }, {
+              "key_code" : "p"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "o-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "k"
+          },
+          "to" : [ {
+            "shell_command" : "afplay /System/Library/Sounds/Tink.aiff"
+          } ],
+          "conditions" : [ {
+            "name" : "o-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 250
+          },
+          "to" : [ {
+            "shell_command" : "afplay /System/Library/Sounds/Tink.aiff"
+          }, {
+            "set_variable" : {
+              "name" : "o-mode",
+              "value" : 1
+            }
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "o"
+            }, {
+              "key_code" : "k"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
@@ -782,7 +962,7 @@
             "value" : 1,
             "type" : "variable_if"
           }, {
-            "bundle_identifiers" : [ "^com\\.visualstudio\\.code\\.oss$" ],
+            "bundle_identifiers" : [ "^com\\.visualstudio\\.code\\.oss$", "^com\\.microsoft\\.VSCode(Insiders)?$", "^com\\.microsoft\\.VSCode?$" ],
             "type" : "frontmost_application_unless"
           } ],
           "type" : "basic"

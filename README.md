@@ -50,17 +50,12 @@ You might wonder why there are 5 hyper-keys, yes it is to much but I'm still fig
 | Capslock         | Escape                      | hyper-key                        |
 | Tab              | Tab / fn18                  | Hammerspoon hyper-key            |
 | e                | e                           | hyper-key                        |
-| o                | o                           | hyper-key (example)              |
-| Spacebar         | Spacebar                    | hyper-key (example)              |
 | Command (l/r)    | &#x2318; + Tab              | Toggle current and previous app  |
 | Option (l/r)     | &#x2318; + \~               | Cycle app windows                |
 | Control (l/r)    | &#x2303; + Tab              | Cycle app tabs                   |
 | left-Shift       | &#x2325; + left-Arrow       | Move cursor one word left        |
 | right-Shift      | &#x2325; + right-Arrow      | Move cursor one word right       |
-| o + s            |                             | Open Safari (example)            |
-| e + m            | &#x2318; + &#x2303; + Space | Open Emoji picker (example)      |
-| Spacebar + \     |                             | Open Finder (example)            |
-| Spacebar + p     |                             | Open Preview (example)           |
+| e + m            | &#x2318; + &#x2303; + Space | Open Emoji picker                |
 | Capslock + l     | &#x2318; + &#x2303; + q     | Lock screen                      |
 | Capslock + m     | &#x2318; + &#x2303; + Space | Open Emoji picker                |
 | Capslock + \     |                             | Open Finder                      |
@@ -74,10 +69,29 @@ You might wonder why there are 5 hyper-keys, yes it is to much but I'm still fig
 | Capslock + 4     |                             | Screenshot to clipboard          |
 | Capslock + 5     |                             | Screenshot and recording options |
 | Capslock + arrow |                             | Move mouse fast                  |
-| left-Option + s  |                             | Safari: Save tabs to markdown    |
-| left-Option + s  |                             | Chrome: Save tabs to markdown    |
-| right-Option + o |                             | Finder: Open in VSCodium         |
-| Capslock + t     |                             | VSCodium: Open terminal          |
+| left-Option + s  |                             | Safari: Save tabs to markdown*   |
+| left-Option + s  |                             | Chrome: Save tabs to markdown*   |
+| right-Option + o |                             | Finder: Open in VSCodium**       |
+| Capslock + t     |                             | VSCodium: Open terminal pane     |
+
+\* See [Saving the Yak browser-trail](https://tisgoud.nl/2020/04/saving-the-yak-browser-trail/)
+
+\*\* See [Open in VCodium](https://tisgoud.nl/2019/09/open-in-vscodium/)
+
+### Example shortcuts
+
+Some shortcuts to test stuff.
+
+| Shortcut      | Keystroke                   | Function                    |
+| :------------ | :-------------------------- | :-------------------------- |
+| o + s         |                             | Open Safari (example)       |
+| o + t         |                             | Type some text (example)    |
+| o + b         |                             | Play beep sound (example)   |
+| o + p         |                             | Play Purr sound (example)   |
+| o + k         |                             | Play Tink sound (example)   |
+| e + m         | &#x2318; + &#x2303; + Space | Open Emoji picker (example) |
+| Spacebar + \  |                             | Open Finder (example)       |
+| Spacebar + p  |                             | Open Preview (example)      |
 
 ## Run Goku -c
 

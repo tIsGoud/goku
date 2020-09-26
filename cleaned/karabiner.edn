@@ -45,9 +45,13 @@
 :templates {
     :open "open -a '%s'"                                ;; :open "Safari"
     :openApp "open \"%s\""                              ;; :open "/Applications/Safari.app"
-    :applescript "osascript '/Users/[your username here]/Library/Mobile Documents/com~apple~ScriptEditor2/Documents/%s'"
-                                                        ;; 'path to user's 'iCloud Drive/Script Editor',
-                                                        ;; '~' can not be used for the users home directory
+    :applescript "osascript '/Users/albert/Library/Mobile Documents/com~apple~ScriptEditor2/Documents/%s'"
+                                                        ;; Full path to user's 'iCloud Drive/Script Editor'
+                                                        ;; You can't use '~' for the users home directory
+    :type "osascript -e 'tell application \"System Events\" to keystroke \"%s\" as text'"
+    :beep "osascript -e 'beep'"                         ;; Play default beep
+    :purr "afplay /System/Library/Sounds/Purr.aiff"     ;; Play the Purr sound
+    :tink "afplay /System/Library/Sounds/Tink.aiff"     ;; Play the Tink sound
 } ;; templates
 
 :applications {                                         ;; Get the app id: `osascript -e 'id of app "VSCodium"'`
@@ -150,10 +154,14 @@
     }
 
     ;; Use o-key to launch apps or actions
-    ;; Mostly as example
+    ;; Mostly examples
     {:des "o-key shortcuts (example)"                   ; Hold 'o' + extra key
      :rules [ :o-mode
         [:s [:open "Safari"]]                           ; 's' - Open Safari
+        [:t [[:type "Moi,oet Grunn!"]]]                 ; 't' - Type some text
+        [:b [:beep]]                                    ; 'b' - beep
+        [:q [:purr]]                                    ; 'q' - play "Purr"
+        [:w [:tink]]                                    ; 'w' - play "Tink"
      ]
     }
 
