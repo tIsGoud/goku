@@ -199,7 +199,6 @@
     {:des "Keychron K1 - microphone button becomes 'Copy picture of selected area to clipboard'"
      :rules [ :kb-keychron-k1
         [[:fn :spacebar] [:screen_capture_clipboard]]   ;; Silently capture selected area to clipboard
-        [[:#Wfn :spacebar] [:screen_capture_preview]]   ;; Silently capture selected area to clipboard
      ]
     }
 
@@ -224,13 +223,13 @@
      ]
     }
 
-    ;; Use the left and right shift-key to move the cursor one word left or right.
-    {:des "Left- and right- shiftkeys: move the cursor one word"
-     :rules [
-        [:##left_shift :left_shift nil {:alone :!Oleft_arrow }]
-        [:##right_shift :right_shift nil {:alone :!Eright_arrow}]
-     ]
-    }
+    ; ;; Use the left and right shift-key to move the cursor one word left or right.
+    ; {:des "Left- and right- shiftkeys: move the cursor one word"
+    ;  :rules [
+    ;     [:##left_shift :left_shift nil {:alone :!Oleft_arrow }]
+    ;     [:##right_shift :right_shift nil {:alone :!Eright_arrow}]
+    ;  ]
+    ; }
 
     ;; Use e-key key to launch apps or actions
     {:des "e-key shortcuts"                             ; Hold 'e' + extra key
