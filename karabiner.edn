@@ -45,9 +45,17 @@
 :templates {
     :open "open -a '%s'"                                ;; :open "Safari"
     :openApp "open \"%s\""                              ;; :open "/Applications/Safari.app"
+    :screen_capture_clipboard "screencapture -ixc"      ;; Capture screen interactive and silent to clipboard
+    :screen_capture_preview "screencapture -ixP"        ;; Capture screen interactive and silent to Preview
     :applescript "osascript '/Users/albert/Library/Mobile Documents/com~apple~ScriptEditor2/Documents/%s'"
                                                         ;; Full path to user's 'iCloud Drive/Script Editor'
                                                         ;; You can't use '~' for the users home directory
+    :ui_audio_enabled "defaults write 'Apple Global Domain' com.apple.sound.uiaudio.enabled -bool %s"
+                                                        ;; Enable or disable "Play user interface sound effects"
+                                                        ;; ui_audio_enabled [true/false]
+    :notification "osascript -e 'display notification \"%s\" with title \"%s\"'"
+                                                        ;; Display notification
+                                                        ;; notifcation "text" "title"
     :type "osascript -e 'tell application \"System Events\" to keystroke \"%s\" as text'"
     :beep "osascript -e 'beep'"                         ;; Play default beep
     :purr "afplay /System/Library/Sounds/Purr.aiff"     ;; Play the Purr sound
@@ -106,6 +114,11 @@
         {:vendor_id 1241, :product_id 36 }
         {:vendor_id 1241, :product_id 41208 }
     ]
+
+    :kb-keychron-k1 [
+        {:vendor_id 1452, product_id 591 }              ;; Keychron K1 keyboard
+    ]
+
 } ;; devices
 
 ;; main contains multiple manipulators
@@ -181,6 +194,15 @@
      ]
     }
 
+    ;; The microphone button by default does function + spacebar on the Keychron K1 keyboard,
+    ;; with this it becomes the "Copy picture of selected area to clipboard".
+    {:des "Keychron K1 - microphone button becomes 'Copy picture of selected area to clipboard'"
+     :rules [ :kb-keychron-k1
+        [[:fn :spacebar] [:screen_capture_clipboard]]   ;; Silently capture selected area to clipboard
+        [[:#Wfn :spacebar] [:screen_capture_preview]]   ;; Silently capture selected area to clipboard
+     ]
+    }
+
     ;; Shortcut `command` for command+tab to switch between the current and previous application
     ;; Shortcut `option` for command+tilde to cycle through the open windows of an application
     ;; Shortcut `control` for control+tab to go to the next tab in most applications
@@ -243,6 +265,8 @@
      :rules [ :hyper-mode
         [:l [:!CTq]]                                    ; 'l' - Lock Screen
         [:m [:!TCspacebar]]                             ; 'm' - Emoji picker
+        [:u [[:notification "🔕" "UI Sound effects off"] [:ui_audio_enabled "false"]["audio_off" 1]] :!audio_off]
+        [:u [[:notification "🔔" "UI Sound effects on"] [:ui_audio_enabled "true"]["audio_off" 0]] :audio_off]
         [:slash [:open "Finder"]]                       ; '/' - Open Finder
         [:p [:open "Preview"]]                          ; 'p' - Open Preview
         [:s [:open "Safari"]]                           ; 's' - Open Safari

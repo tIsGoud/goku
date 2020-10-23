@@ -41,6 +41,14 @@ The specific Apple keyboard setting involve the use of the 'fn' or function key.
 | fn + l   | &#x2318; + &#x2303; + q     | Lock screen |
 | fn + s   | &#x2318; + &#x2325; + Eject | Sleep       |
 
+### Keychron K1 keyboard specific settings
+
+The Keychron K1 keyboard setting has a special keys to take a screenshot right next to it is a key with a microphone that sends out fn + spacebar. I use this key to silently take a screenshot.
+
+| Shortcut   | Keystroke     | Function           |
+| :--------- | :------------ | :----------------- |
+| microphone | fn + spacebar | Call screencapture |
+
 ### Generic shortcuts
 
 You might wonder why there are 5 hyper-keys, yes it is to much but I'm still figuring out which hyperkey location is most convenient. The position of your hands above the keyboard is an important factor in this. Using the capslock as hyper key is also a good option due to the size of the key.
@@ -58,6 +66,7 @@ You might wonder why there are 5 hyper-keys, yes it is to much but I'm still fig
 | e + m            | &#x2318; + &#x2303; + Space | Open Emoji picker                |
 | Capslock + l     | &#x2318; + &#x2303; + q     | Lock screen                      |
 | Capslock + m     | &#x2318; + &#x2303; + Space | Open Emoji picker                |
+| Capslock + u     |                             | Toggle System UI Sound Effects   |
 | Capslock + \     |                             | Open Finder                      |
 | Capslock + s     |                             | Open Safari                      |
 | Capslock + f     |                             | Open Firefox                     |
