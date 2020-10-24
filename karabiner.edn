@@ -88,6 +88,7 @@
     :e-mode {:key :e}                                   ;; make the e-key a simlayer key
     :o-mode {:key :o}                                   ;; make the o-key a simlayer key
     :space-mode {:key :spacebar}                        ;; make the spacebar a simlayer key
+    :j-mode {:key :j}
 } ;; simlayers
 
 ;; Define different kinds of keyboards
@@ -256,6 +257,15 @@
      :rules [ :space-mode
         [:slash [:open "Finder"]]                       ; '/' - Open Finder
         [:p [:open "Preview"]]                          ; 'p' - Open Preview
+     ]
+    }
+
+    ;; Use j to launch apps or actions
+    ;; Mostly as example for German Ed
+    {:des "J shortcuts (example)"                       ; Hold 'j' + extra key
+     :rules [ :j-mode
+        [:o [:!Ou :o]]                                  ; Option + o = ö
+        [:s [:!Os]]                                     ; Option + s = ß
      ]
     }
 
