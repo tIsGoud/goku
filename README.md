@@ -58,9 +58,9 @@ You might wonder why there are so many hyper-keys, yes it is to much but I'm sti
 | Capslock         | Escape                      | hyper-key                        |
 | Tab              | Tab / fn18                  | Hammerspoon hyper-key            |
 | e                | e                           | hyper-key                        |
-| Command (l|r)    | &#x2318; + Tab              | Toggle current and previous app  |
-| Option (l|r)     | &#x2318; + \~               | Cycle app windows                |
-| Control (l|r)    | &#x2303; + Tab              | Cycle app tabs                   |
+| Command (l\|r)   | &#x2318; + Tab              | Toggle current and previous app  |
+| Option (l\|r)    | &#x2318; + \~               | Cycle app windows                |
+| Control (l\|r)   | &#x2303; + Tab              | Cycle app tabs                   |
 | left-Shift       | &#x2325; + left-Arrow       | Move cursor one word left        |
 | right-Shift      | &#x2325; + right-Arrow      | Move cursor one word right       |
 | e + m            | &#x2318; + &#x2303; + Space | Open Emoji picker                |
@@ -101,7 +101,7 @@ Three simlayers have been added to make it easier to type these special vowel ch
 - ';' + vowel = vowel + umlaut
 - '\' + vowel = vowel + accent grave
 
-For example: '/' + 'a' = 'á'
+For example: [[/]] + 'a' = 'á'
 
 ### Example shortcuts
 
