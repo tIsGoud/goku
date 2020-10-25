@@ -97,11 +97,11 @@ In my current configuration I disabled the left- and right-shift options to move
 
 Three simlayers have been added to make it easier to type these special vowel characters.
 
-- '/' + vowel = vowel + acccent aigu
-- ';' + vowel = vowel + umlaut
-- '\' + vowel = vowel + accent grave
+- Slash ('/') + vowel = vowel + acccent aigu
+- Semicolon (';') + vowel = vowel + umlaut
+- Backslah ('\') + vowel = vowel + accent grave
 
-For example: [[/]] + 'a' = 'á'
+For example: '/' + 'a' = á
 
 ### Example shortcuts
 
