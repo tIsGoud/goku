@@ -45,6 +45,7 @@
 :templates {
     :open "open -a '%s'"                                ;; :open "Safari"
     :openApp "open \"%s\""                              ;; :open "/Applications/Safari.app"
+    :openFinder "open \"/System/Library/CoreServices/Finder.app\"" ;; "openFinder" to switch to the Finder
     :screen_capture_clipboard "screencapture -ixc"      ;; Capture screen interactive and silent to clipboard
     :screen_capture_preview "screencapture -ixP"        ;; Capture screen interactive and silent to Preview
     :applescript "osascript '/Users/albert/Library/Mobile Documents/com~apple~ScriptEditor2/Documents/%s'"
@@ -57,6 +58,7 @@
                                                         ;; Display notification
                                                         ;; notifcation "text" "title"
     :type "osascript -e 'tell application \"System Events\" to keystroke \"%s\" as text'"
+    :snippet "cat '/Users/albert/Library/Mobile Documents/com~apple~CloudDocs/Snippets/%s' | pbcopy -pboard general"
     :beep "osascript -e 'beep'"                         ;; Play default beep
     :purr "afplay /System/Library/Sounds/Purr.aiff"     ;; Play the Purr sound
     :tink "afplay /System/Library/Sounds/Tink.aiff"     ;; Play the Tink sound
@@ -88,7 +90,10 @@
     :e-mode {:key :e}                                   ;; make the e-key a simlayer key
     :o-mode {:key :o}                                   ;; make the o-key a simlayer key
     :space-mode {:key :spacebar}                        ;; make the spacebar a simlayer key
-    :j-mode {:key :j}
+    :slash-mode {:key :slash}                           ;; make the slash a simlayer key for special vowel characters
+    :semicolon-mode {:key :semicolon}                   ;; make the semicolon a simlayer key for special vowel characters
+    :backslash-mode {:key :backslash}                   ;; make the backslash a simlayer key for special vowel characters
+    :j-mode {:key :j}                                   ;; example for German Ed
 } ;; simlayers
 
 ;; Define different kinds of keyboards
@@ -191,7 +196,7 @@
     {:des "Apple keyboard - fn + l to Lock-screen, fn + s to Sleep"
      :rules [ :kb-apple
         [:!Fl [:!CTq]]                                  ;; Function + l to Lock Screen (Command-Control-Q)
-        [:!Fs [:!COeject]]                              ;; Function + s to Sleep (Command-Option-Eject)
+        [:!Fz [:!COeject]]                              ;; Function + s to Sleep (Command-Option-Eject)
      ]
     }
 
@@ -225,10 +230,28 @@
     }
 
     ; ;; Use the left and right shift-key to move the cursor one word left or right.
+    ; ;; [disabled it for now, I made too many typing mistakes due to it...]
     ; {:des "Left- and right- shiftkeys: move the cursor one word"
     ;  :rules [
     ;     [:##left_shift :left_shift nil {:alone :!Oleft_arrow }]
     ;     [:##right_shift :right_shift nil {:alone :!Eright_arrow}]
+    ;  ]
+    ; }
+
+    ; ;; Use the left and right shift-key simultaneously to activate capslock.
+    ; ;; [disabled, does not work with the capslock as hyper-key]
+    ; {:des "Left- and right- shiftkeys simultaneously to toggle capslock"
+    ;  :rules [
+    ;     [[:left_shift :right_shift] [:caps_lock]]
+    ;  ]
+    ; }
+
+    ; ;; Use the left-most bottom row key as 'escape' key.
+    ; ;; [experimental work-in-progress]
+    ; {:des "Left-most bottom row key as 'escape' key"
+    ;  :rules [
+    ;    ; [:##left_control :left_control nil {:alone :escape}]  ; left-control to escape for Qisan Magicforce keyboards
+    ;     [:##fn :fn nil {:alone :escape}]                ; function key for MacBook Pro keyboards
     ;  ]
     ; }
 
@@ -255,7 +278,8 @@
     ;; Mostly as example
     {:des "Spacebar shortcuts (example)"                ; Hold 'space' + extra key
      :rules [ :space-mode
-        [:slash [:open "Finder"]]                       ; '/' - Open Finder
+        [:slash [:openFinder]]                          ; '/' - Open Finder
+        [:f [:openFinder]]                              ; 'f' - Open Finder
         [:p [:open "Preview"]]                          ; 'p' - Open Preview
      ]
     }
@@ -269,14 +293,37 @@
      ]
     }
 
+    ;; Special 'vowel' characters, '/', ';' and '\' are easy to remember as shortcut keys
+    {:des "Special 'vowel' character - '/' for accent aigu and ';' for umlaut and '\\' for grave accent"
+     :rules [
+        [:a [:!Oe :a] [:slash-mode]]                    ; '/' + a = á
+        [:e [:!Oe :e] [:slash-mode]]                    ; '/' + e = é
+        [:i [:!Oe :i] [:slash-mode]]                    ; '/' + i = í
+        [:o [:!Oe :o] [:slash-mode]]                    ; '/' + o = ó
+        [:u [:!Oe :u] [:slash-mode]]                    ; '/' + u = ú
+        [:a [:!Ou :a] [:semicolon-mode]]                ; ';' + a = ä
+        [:e [:!Ou :e] [:semicolon-mode]]                ; ';' + e = ë
+        [:i [:!Ou :i] [:semicolon-mode]]                ; ';' + i = ï
+        [:o [:!Ou :o] [:semicolon-mode]]                ; ';' + o = ö
+        [:u [:!Ou :u] [:semicolon-mode]]                ; ';' + u = ü
+        [:a [:!Ograve_accent_and_tilde :a] [:backslash-mode]] ; '\' + a = à
+        [:e [:!Ograve_accent_and_tilde :e] [:backslash-mode]] ; '\' + e = à
+        [:i [:!Ograve_accent_and_tilde :i] [:backslash-mode]] ; '\' + i = ì
+        [:o [:!Ograve_accent_and_tilde :o] [:backslash-mode]] ; '\' + o = ò
+        [:u [:!Ograve_accent_and_tilde :u] [:backslash-mode]] ; '\' + u = ù
+     ]
+    }
+
     ;; Use caps_lock key to launch apps or actions
     {:des "Hyper-mode shortcuts"                        ; Hold 'caps_lock' + extra key
      :rules [ :hyper-mode
-        [:l [:!CTq]]                                    ; 'l' - Lock Screen
+        [:l [:!CTq]]                                    ; 'l' - Lock Screen (Command-Control-Q)
+        [:z [:!COeject]]                                ; 'z' - Sleep (Command-Option-Eject)
         [:m [:!TCspacebar]]                             ; 'm' - Emoji picker
-        [:u [[:notification "🔕" "UI Sound effects off"] [:ui_audio_enabled "false"]["audio_off" 1]] :!audio_off]
-        [:u [[:notification "🔔" "UI Sound effects on"] [:ui_audio_enabled "true"]["audio_off" 0]] :audio_off]
-        [:slash [:open "Finder"]]                       ; '/' - Open Finder
+        [:o [:applescript "Open in VSCodium.scpt"] :finder] ; 'o' - Finder specific, open file or folder in VSCodium
+        [:u [[:notification "🔕" "UI Sound effects off"] [:ui_audio_enabled "false"] ["audio_off" 1]] :!audio_off]
+        [:u [[:notification "🔔" "UI Sound effects on"] [:ui_audio_enabled "true"] ["audio_off" 0]] :audio_off]
+        [:slash [:openFinder]]                          ; '/' - Open Finder
         [:p [:open "Preview"]]                          ; 'p' - Open Preview
         [:s [:open "Safari"]]                           ; 's' - Open Safari
         [:f [:open "Firefox Developer Edition"]]        ; 'f' - Open Firefox
@@ -285,7 +332,7 @@
         [:t [:open "iTerm"] [:!code]]                   ; 't' - Open iTerm 'console' or 'commandline'
         [:y [:open "Typora"]]                           ; 'y' - Open Typora
         [:v [:open "VSCodium"]]                         ; 'v' - Open VSCodium
-        [:4 [:!TSC4]]                                   ; '4' - Screenshot to clipboard
+        [:4 [:screen_capture_clipboard]]                ; '4' - Silent screenshot to clipboard [:!TSC4]
         [:5 [:!SC5]]                                    ; '5' - Screenshot and recording options
      ]
     }
@@ -340,7 +387,7 @@
     {:des "Safari: run script to save tabs to markdown (left-option + 'o')"
      :rules [ :safari
         [:!Os [:applescript "SaveSafariTabsToMarkdown.scpt"]]
-                                                        ;; Examples of other possible functions
+                                                        ; Examples of other possible functions
         [:!Oa "say 'now we are in Safari'"]
         [:!Of ["osascript -e 'tell app \"Finder\" to make new Finder window'"]]
         [:!Oh ["osascript -e 'display dialog \"Hello from Karabiner-elements\" with title \"This must be Safari!\"'"]]
@@ -360,7 +407,7 @@
     ;; Info on the used AppleScript: "https://tisgoud.nl/2019/09/open-in-vscodium/"
     {:des "Finder: run script to open selected file or directory in VSCodium (right-option + 'o')"
      :rules [ :finder
-        [:!Eo [:applescript "Open in VSCodium.scpt"]]   ;; right_option + 'o' to open the file or folder in VSCodium
+        [:!Eo [:applescript "Open in VSCodium.scpt"]]   ; right_option + 'o' to open the file or folder in VSCodium
      ]
     }
 
@@ -369,6 +416,7 @@
     {:des "VSCode/VSCodium shortcuts"                   ; Hold 'caps_lock' + extra key
      :rules [ :code :hyper-mode
         [:t [:!TSgrave_accent_and_tilde]]               ; 't' - Open terminal
+        [:h [:snippet "hugo_frontmatter.txt"]]          ; 'h' - Copy snippet to clipboard
      ]
     }
 
