@@ -81,6 +81,7 @@ You might wonder why there are so many hyper-keys, yes it is to much but I'm sti
 | Capslock + arrow |                             | Move mouse fast                  |
 | left-Option + s  |                             | Safari: Save tabs to markdown**  |
 | left-Option + s  |                             | Chrome: Save tabs to markdown**  |
+| Capslock + o     |                             | Finder: Open in VSCodium***      |
 | right-Option + o |                             | Finder: Open in VSCodium***      |
 | Capslock + t     |                             | VSCodium: Open terminal pane     |
 | Capslock + h     |                             | VSCodium: Snippet to clipboard   |
