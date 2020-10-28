@@ -47,7 +47,10 @@
     :openApp "open \"%s\""                              ;; :open "/Applications/Safari.app"
     :openFinder "open \"/System/Library/CoreServices/Finder.app\"" ;; "openFinder" to switch to the Finder
     :screen_capture_clipboard "screencapture -ixc"      ;; Capture screen interactive and silent to clipboard
-    :screen_capture_preview "screencapture -ixP"        ;; Capture screen interactive and silent to Preview
+    :screen_capture_preview "screencapture -ixP"        ;; Capture screen interactive and silent to Preview.
+                                                        ;; Note: Allow 'karabiner_console_user_server'
+                                                        ;; to record the screen in 'System Preferences' /
+                                                        ;; 'Security & Privacy' / 'Privacy' / 'Screen Recording'.
     :applescript "osascript '/Users/albert/Library/Mobile Documents/com~apple~ScriptEditor2/Documents/%s'"
                                                         ;; Full path to user's 'iCloud Drive/Script Editor'
                                                         ;; You can't use '~' for the users home directory

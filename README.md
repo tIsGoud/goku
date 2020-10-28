@@ -6,7 +6,7 @@ It contains the fully documented Goku file (karabiner.edn) as well as the genera
 
 In my configuration I remapped some specific "PC" keys for my Qisan Magicforce 68 keyboard.
 
-A cleaned version is also available, I created this version for my colleague with just a Macbook Pro. The same generic functionality.
+A cleaned version is also available, I created this version for my colleague with just a Macbook Pro. Almost the same generic functionality but not up to date. 
 
 I wrote two blogposts with background information on the choices made and tools explored:
 
