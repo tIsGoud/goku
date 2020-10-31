@@ -6,7 +6,7 @@ It contains the fully documented Goku file (karabiner.edn) as well as the genera
 
 In my configuration I remapped some specific "PC" keys for my Qisan Magicforce 68 keyboard.
 
-A cleaned version is also available, I created this version for my colleague with just a Macbook Pro. Almost the same generic functionality but not up to date. 
+A cleaned version is also available, I created this version for my colleague with just a Macbook Pro. Almost the same generic functionality but not up to date.
 
 I wrote two blogposts with background information on the choices made and tools explored:
 
@@ -83,6 +83,7 @@ You might wonder why there are so many hyper-keys, yes it is to much but I'm sti
 | left-Option + s  |                             | Chrome: Save tabs to markdown**  |
 | Capslock + o     |                             | Finder: Open in VSCodium***      |
 | right-Option + o |                             | Finder: Open in VSCodium***      |
+| Capslock + b     |                             | Typora/VSCodium: Toggle sidebar  |
 | Capslock + t     |                             | VSCodium: Open terminal pane     |
 | Capslock + h     |                             | VSCodium: Snippet to clipboard   |
 

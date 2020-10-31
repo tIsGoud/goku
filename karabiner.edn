@@ -76,6 +76,7 @@
     :code ["^com\\.visualstudio\\.code\\.oss$"
            "^com\\.microsoft\\.VSCode(Insiders)?$"
            "^com\\.microsoft\\.VSCode?$"]
+    :typora ["^abnerworks\\.Typora$"]
 }
 
 ;; layers are basically "hyper" keys
@@ -417,9 +418,19 @@
     ;; Use caps_lock key to launch apps or actions in VSCode/VSCodium
     ;; When the same keycode is used as general rule/shortcut, '!code' is required on the original rule
     {:des "VSCode/VSCodium shortcuts"                   ; Hold 'caps_lock' + extra key
-     :rules [ :code :hyper-mode
-        [:t [:!TSgrave_accent_and_tilde]]               ; 't' - Open terminal
-        [:h [:snippet "hugo_frontmatter.txt"]]          ; 'h' - Copy snippet to clipboard
+     :rules [ :hyper-mode
+        [:b [:!Cb] :code]                               ; 'b' - Toggle sidebar, interferes with Command-b used in markdown
+        [:t [:!TSgrave_accent_and_tilde] :code]         ; 't' - Open terminal
+        [:h [:snippet "hugo_frontmatter.txt"] :code]    ; 'h' - Copy snippet to clipboard
+     ]
+    }
+
+    ;; Use caps_lock key to launch apps or actions in VSCode/VSCodium
+    ;; When the same keycode is used as general rule/shortcut, '!code' is required on the original rule
+    {:des "Typora shortcuts"                            ; Hold 'caps_lock' + extra key
+     :rules [ :hyper-mode
+        [:b [:!SCl] :typora]                            ; 'b' - Toggle sidebar
+        [:h [:snippet "hugo_frontmatter.txt"] :typora]  ; 'h' - Copy snippet to clipboard
      ]
     }
 
