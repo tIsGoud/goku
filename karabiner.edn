@@ -54,9 +54,9 @@
     :applescript "osascript '/Users/albert/Library/Mobile Documents/com~apple~ScriptEditor2/Documents/%s'"
                                                         ;; Full path to user's 'iCloud Drive/Script Editor'
                                                         ;; You can't use '~' for the users home directory
-    :ui_audio_enabled "defaults write 'Apple Global Domain' com.apple.sound.uiaudio.enabled -bool %s"
+    :ui_audio_enabled "defaults write 'Apple Global Domain' com.apple.sound.uiaudio.enabled -int %s"
                                                         ;; Enable or disable "Play user interface sound effects"
-                                                        ;; ui_audio_enabled [true/false]
+                                                        ;; ui_audio_enabled 0 (off) or 1 (on)
     :notification "osascript -e 'display notification \"%s\" with title \"%s\"'"
                                                         ;; Display notification
                                                         ;; notifcation "text" "title"
@@ -324,8 +324,8 @@
         [:z [:!COeject]]                                ; 'z' - Sleep (Command-Option-Eject)
         [:m [:!TCspacebar]]                             ; 'm' - Emoji picker
         [:o [:applescript "Open in VSCodium.scpt"] :finder] ; 'o' - Finder specific, open file or folder in VSCodium
-        [:u [[:notification "🔕" "UI Sound effects off"] [:ui_audio_enabled "false"] ["audio_off" 1]] :!audio_off]
-        [:u [[:notification "🔔" "UI Sound effects on"] [:ui_audio_enabled "true"] ["audio_off" 0]] :audio_off]
+        [:u [[:notification "🔕" "UI Sound effects off"] [:ui_audio_enabled "0"] ["audio_off" 1]] :!audio_off]
+        [:u [[:notification "🔔" "UI Sound effects on"] [:ui_audio_enabled "1"] ["audio_off" 0]] :audio_off]
         [:slash [:openFinder]]                          ; '/' - Open Finder
         [:p [:open "Preview"]]                          ; 'p' - Open Preview
         [:s [:open "Safari"]]                           ; 's' - Open Safari
