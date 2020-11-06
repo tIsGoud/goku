@@ -103,6 +103,7 @@
 ;; Define different kinds of keyboards
 :devices {
     :kb-apple [
+        
         {:vendor_id 1452}                               ;; product_id 636 for MacBook Pro (15-inch, 2018) internal keyboard
         {:vendor_id 76}
     ]
@@ -305,9 +306,7 @@
         [:i [:!Oe :i] [:slash-mode]]                    ; '/' + i = í
         [:o [:!Oe :o] [:slash-mode]]                    ; '/' + o = ó
         [:u [:!Oe :u] [:slash-mode]]                    ; '/' + u = ú
-        [:b [:!Oe :!Sa] [:slash-mode]]                    ; '/' + a = á
-        [:!Sa [:!Oe :!Sa] [:slash-mode]]                    ; '/' + a = á
-        [:!Rslash :a [:!Oe :!Sa]]
+        [:b [:!Oe :!Sa] [:slash-mode]]                  ; '/' + a = á
         [:a [:!Ou :a] [:semicolon-mode]]                ; ';' + a = ä
         [:e [:!Ou :e] [:semicolon-mode]]                ; ';' + e = ë
         [:i [:!Ou :i] [:semicolon-mode]]                ; ';' + i = ï
