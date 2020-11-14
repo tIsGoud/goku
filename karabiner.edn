@@ -94,10 +94,10 @@
     :e-mode {:key :e}                                   ;; make the e-key a simlayer key
     :o-mode {:key :o}                                   ;; make the o-key a simlayer key
     :space-mode {:key :spacebar}                        ;; make the spacebar a simlayer key
-    :slash-mode {:key :slash}                           ;; make the slash a simlayer key for special vowel characters
-    :semicolon-mode {:key :semicolon}                   ;; make the semicolon a simlayer key for special vowel characters
-    :backslash-mode {:key :backslash}                   ;; make the backslash a simlayer key for special vowel characters
-    :6-mode {:key :6}                                   ;; make the 6-key a simlayer key for special vowel characters
+    :slash-mode {:key :slash}                           ;; '/' + vowel = acute accent
+    :semicolon-mode {:key :semicolon}                   ;; ';' + vowel = umlaut
+    :backslash-mode {:key :backslash}                   ;; '\' + vowel = grave accent
+    :6-mode {:key :6}                                   ;; '6' + vowel = circumflex
 } ;; simlayers
 
 ;; Define different kinds of keyboards
@@ -290,7 +290,7 @@
     }
 
     ;; Special 'vowel' characters, '/', ';' and '\' are easy to remember as shortcut keys
-    {:des "Special 'vowel' character - '/' for accent aigu and ';' for umlaut, '\\' for grave accent '6' for circumflex."
+    {:des "Special 'vowel' characters - '/' for acute accent and ';' for umlaut, '\\' for grave accent and '6' for circumflex."
      :rules [
         [:a [:!Oe :a] [:slash-mode]]                    ; '/' + a = á
         [:e [:!Oe :e] [:slash-mode]]                    ; '/' + e = é
