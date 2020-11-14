@@ -97,13 +97,13 @@
     :slash-mode {:key :slash}                           ;; make the slash a simlayer key for special vowel characters
     :semicolon-mode {:key :semicolon}                   ;; make the semicolon a simlayer key for special vowel characters
     :backslash-mode {:key :backslash}                   ;; make the backslash a simlayer key for special vowel characters
-    :j-mode {:key :j}                                   ;; example for German Ed
+    :6-mode {:key :6}                                   ;; make the 6-key a simlayer key for special vowel characters
 } ;; simlayers
 
 ;; Define different kinds of keyboards
 :devices {
     :kb-apple [
-        
+
         {:vendor_id 1452}                               ;; product_id 636 for MacBook Pro (15-inch, 2018) internal keyboard
         {:vendor_id 76}
     ]
@@ -289,24 +289,14 @@
      ]
     }
 
-    ;; Use j to launch apps or actions
-    ;; Mostly as example for German Ed
-    {:des "J shortcuts (example)"                       ; Hold 'j' + extra key
-     :rules [ :j-mode
-        [:o [:!Ou :o]]                                  ; Option + o = ö
-        [:s [:!Os]]                                     ; Option + s = ß
-     ]
-    }
-
     ;; Special 'vowel' characters, '/', ';' and '\' are easy to remember as shortcut keys
-    {:des "Special 'vowel' character - '/' for accent aigu and ';' for umlaut and '\\' for grave accent"
+    {:des "Special 'vowel' character - '/' for accent aigu and ';' for umlaut, '\\' for grave accent '6' for circumflex."
      :rules [
         [:a [:!Oe :a] [:slash-mode]]                    ; '/' + a = á
         [:e [:!Oe :e] [:slash-mode]]                    ; '/' + e = é
         [:i [:!Oe :i] [:slash-mode]]                    ; '/' + i = í
         [:o [:!Oe :o] [:slash-mode]]                    ; '/' + o = ó
         [:u [:!Oe :u] [:slash-mode]]                    ; '/' + u = ú
-        [:b [:!Oe :!Sa] [:slash-mode]]                  ; '/' + a = á
         [:a [:!Ou :a] [:semicolon-mode]]                ; ';' + a = ä
         [:e [:!Ou :e] [:semicolon-mode]]                ; ';' + e = ë
         [:i [:!Ou :i] [:semicolon-mode]]                ; ';' + i = ï
@@ -317,6 +307,11 @@
         [:i [:!Ograve_accent_and_tilde :i] [:backslash-mode]] ; '\' + i = ì
         [:o [:!Ograve_accent_and_tilde :o] [:backslash-mode]] ; '\' + o = ò
         [:u [:!Ograve_accent_and_tilde :u] [:backslash-mode]] ; '\' + u = ù
+        [:a [:!Oi :a] [:6-mode]]                        ; '/' + a = â
+        [:e [:!Oi :e] [:6-mode]]                        ; '/' + e = ê
+        [:i [:!Oi :i] [:6-mode]]                        ; '/' + i = î
+        [:o [:!Oi :o] [:6-mode]]                        ; '/' + o = ô
+        [:u [:!Oi :u] [:6-mode]]                        ; '/' + u = û
      ]
     }
 
@@ -372,17 +367,6 @@
     ; {:des "Quit application by pressing command-q twice"
     ;  :rules [[:!C#Pq [:!Cq ["command-q" 0]] ["command-q" 1]]
     ;          [:!C#Pq ["command-q" 1] nil {:delayed {:invoked ["command-q" 0] :canceled ["command-q" 0]}}]
-    ;  ]
-    ; }
-
-    ;; Attempt to do a double tap with the left-control key. Double tap works but control-c fails.
-    ;; Double tap the left-control to bring up the emoji-picker.
-    ; {:des "Open emoji-picker by pressing left-control twice"
-    ;  :rules [
-    ;     [:##left_control [:!TCspacebar  ["left_control_twice" 0]] ["left_control_twice" 1]]
-    ;     [:##left_control ["left_control_twice" 1] ["left_control_twice" 0]
-    ;       {:delayed {:invoked [:left_control ["left_control_twice" 0]] :canceled ["left_control_twice" 0]} :held [:##left_control]}
-    ;     ]
     ;  ]
     ; }
 
