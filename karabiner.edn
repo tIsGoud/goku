@@ -146,10 +146,10 @@
     ;;       |_____| |_______________| |_| |_________________________________________|
     ;;        <from>    <to>      <conditions>         <other options>
 
-    ;; Tab is set to F18 as hyperkey for Hammerspoon, alone it acts as tab.
-    {:des "Tab to F18/Tab, trigger for Hyperspoon, ehh Hammerspoon"
+    ;; Tab is set to hyperkey for Hammerspoon, alone it acts as tab.
+    {:des "Tab to Hyper/Tab, trigger for Hammerspoon"
      :rules [
-        [:##tab :f18 nil {:alone :tab}]
+        [:##tab :!CTOleft_shift nil {:alone :tab}]
      ]
     }
 
