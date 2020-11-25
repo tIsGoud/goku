@@ -53,39 +53,48 @@ The Keychron K1 keyboard setting has a special keys to take a screenshot right n
 
 You might wonder why there are so many hyper-keys, yes it is to much but I'm still figuring out which hyperkey location is most convenient. The position of your hands above the keyboard is an important factor in this. Using the capslock as hyper key is also a good option due to the size of the key.
 
-| Shortcut         | Keystroke                   | Function                         |
-| :--------------- | :-------------------------- | :------------------------------- |
-| Capslock         | Escape                      | hyper-key                        |
-| Tab              | Tab / fn18                  | Hammerspoon hyper-key            |
-| e                | e                           | hyper-key                        |
-| Command (l\|r)   | &#x2318; + Tab              | Toggle current and previous app  |
-| Option (l\|r)    | &#x2318; + \~               | Cycle app windows                |
-| Control (l\|r)   | &#x2303; + Tab              | Cycle app tabs                   |
-| left-Shift       | &#x2325; + left-Arrow       | Move cursor one word left        |
-| right-Shift      | &#x2325; + right-Arrow      | Move cursor one word right       |
-| e + m            | &#x2318; + &#x2303; + Space | Open Emoji picker                |
-| Capslock + l     | &#x2318; + &#x2303; + q     | Lock screen                      |
-| Capslock + z     | &#x2318; + &#x2325; + eject | Sleep                            |
-| Capslock + m     | &#x2318; + &#x2303; + Space | Open Emoji picker                |
-| Capslock + u     |                             | Toggle System UI Sound Effects*  |
-| Capslock + \     |                             | Open Finder                      |
-| Capslock + s     |                             | Open Safari                      |
-| Capslock + f     |                             | Open Firefox                     |
-| Capslock + k     |                             | Open Kubernetic                  |
-| Capslock + g     |                             | Open Google Chrome               |
-| Capslock + t     |                             | Open iTerm                       |
-| Capslock + y     |                             | Open Typora                      |
-| Capslock + v     |                             | Open VSCodium                    |
-| Capslock + 4     |                             | Silent screenshot to clipboard   |
-| Capslock + 5     |                             | Screenshot and recording options |
-| Capslock + arrow |                             | Move mouse fast                  |
-| left-Option + s  |                             | Safari: Save tabs to markdown**  |
-| left-Option + s  |                             | Chrome: Save tabs to markdown**  |
-| Capslock + o     |                             | Finder: Open in VSCodium***      |
-| right-Option + o |                             | Finder: Open in VSCodium***      |
-| Capslock + b     |                             | Typora/VSCodium: Toggle sidebar  |
-| Capslock + t     |                             | VSCodium: Open terminal pane     |
-| Capslock + h     |                             | VSCodium: Snippet to clipboard   |
+| Shortcut             | Keystroke                   | Function                         |
+| :--------------------| :-------------------------- | :------------------------------- |
+| Capslock             | Escape                      | hyper-key                        |
+| Tab                  | Tab / 'hyper'               | Hammerspoon hyper-key            |
+| e                    | e                           | hyper-key                        |
+| Command (l\|r)       | &#x2318; + Tab              | Toggle current and previous app  |
+| Option (l\|r)        | &#x2318; + \~               | Cycle app windows                |
+| Control (l\|r)       | &#x2303; + Tab              | Cycle app tabs                   |
+| left-Shift           | &#x2325; + left-Arrow       | Move cursor one word left        | suspended
+| right-Shift          | &#x2325; + right-Arrow      | Move cursor one word right       | suspended
+| e + m                | &#x2318; + &#x2303; + Space | Open Emoji picker                |
+| Capslock + l         | &#x2318; + &#x2303; + q     | Lock screen                      |
+| Capslock + z         | &#x2318; + &#x2325; + eject | Sleep                            |
+| Capslock + m         | &#x2318; + &#x2303; + Space | Open Emoji picker                |
+| Capslock + u         |                             | Toggle System UI Sound Effects*  |
+| Capslock + \         |                             | Open Finder                      |
+| Capslock + s         |                             | Open Safari                      |
+| Capslock + f         |                             | Open Firefox                     |
+| Capslock + k         |                             | Open Kubernetic                  |
+| Capslock + g         |                             | Open Google Chrome               |
+| Capslock + t         |                             | Open iTerm                       |
+| Capslock + y         |                             | Open Typora                      |
+| Capslock + v         |                             | Open VSCodium                    |
+| Capslock + 4         |                             | Silent screenshot to clipboard   |
+| Capslock + 5         |                             | Screenshot and recording options |
+| Capslock + arrow     |                             | Move mouse fast                  |
+| left-Option + s      |                             | Safari: Save tabs to markdown**  |
+| left-Option + s      |                             | Chrome: Save tabs to markdown**  |
+| Capslock + o         |                             | Finder: Open in VSCodium***      |
+| right-Option + o     |                             | Finder: Open in VSCodium***      |
+| Capslock + b         |                             | Typora/VSCodium: Toggle sidebar  |
+| Capslock + t         |                             | VSCodium: Open terminal pane     |
+| Capslock + h         |                             | VSCodium: Snippet to clipboard   |
+| / + vowel            |                             | acccent aigu: á, é, í, ó, ú      |
+| ; + vowel            |                             | umlaut: ä, ë, ï, ö, ü            |
+| \\ + vowel           |                             | accent grave: à, è, ì, ò, ù      |
+| 6 + vowel            |                             | circumflex: â, ê, î, ô, û        |
+| / + (shift + vowel)  |                             | acccent aigu: Á, É, Í, Ó, Ú      |
+| ; + (shift + vowel)  |                             | umlaut: Ä, Ë, Ï, Ö, Ü            |
+| \\ + (shift + vowel) |                             | accent grave: À, È, Ì, Ò, Ù      |
+| 6 + (shift + vowel)  |                             | circumflex: Â, Ê, Î, Ô, Û        |
+| Capslock + r         |                             | Reload Hammerspoon config        |
 
 In my current configuration I disabled the left- and right-shift options to move the cursor one word to the left or right. Too many typing errors.
 
@@ -97,11 +106,14 @@ In my current configuration I disabled the left- and right-shift options to move
 
 ### Special characters
 
-Three simlayers have been added to make it easier to type these special vowel characters.
+Four layers have been added to make it easier to type diacritic characters.
 
-- Slash ('/') + vowel = vowel + acccent aigu
+- Slash ('/') + vowel = vowel + acccent aigu acute accent
 - Semicolon (';') + vowel = vowel + umlaut
-- Backslah ('\') + vowel = vowel + accent grave
+- Backslash ('\') + vowel = vowel + accent grave
+- Six ('6') + vowel = vowel + circumflex
+
+Capitalized versions: layerkey + (shift + vowel) = capitalized vowel with accent
 
 For example: '/' + 'a' = á
 

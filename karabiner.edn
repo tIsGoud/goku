@@ -33,11 +33,11 @@
     :Default { :default true
         :sim     50     ;; simultaneous_threshold_milliseconds (def: 50)
                         ;; keys need to be pressed within this threshold to be considered simultaneous
-        :delay   500    ;; to_delayed_action_delay_milliseconds (def: 500)
+        :delay   300    ;; to_delayed_action_delay_milliseconds (def: 500)
                         ;; basically it means time after which the key press is count delayed
-        :alone   500    ;; to_if_alone_timeout_milliseconds (def: 1000)
+        :alone   300    ;; to_if_alone_timeout_milliseconds (def: 1000)
                         ;; hold for 995s and single tap registered; hold for 1005s and seen as modifier
-        :held    1000   ;; to_if_held_down_threshold_milliseconds (def: 500)
+        :held    500    ;; to_if_held_down_threshold_milliseconds (def: 500)
                         ;; key is fired twice when 500 ms is elapsed (otherwise seen as a hold command)
     }
 } ;; profiles
@@ -65,8 +65,8 @@
     :beep "osascript -e 'beep'"                         ;; Play default beep
     :purr "afplay /System/Library/Sounds/Purr.aiff"     ;; Play the Purr sound
     :tink "afplay /System/Library/Sounds/Tink.aiff"     ;; Play the Tink sound
+    :hammerspoon "open -g hammerspoon://%s"             ;; Call Hammerspoon eventhandler
 } ;; templates
-
 
 :applications {                                         ;; Get the app id: `osascript -e 'id of app "VSCodium"'`
     :chrome ["^com\\.google\\.Chrome$"]
@@ -79,12 +79,23 @@
     :typora ["^abnerworks\\.Typora$"]
 }
 
+; :froms {
+;     :anykey {:any :key_code :modi {:optional [:any]}}
+;     :any_shift_key {:any :key_code :modi {:mandatory [:left_shift :right_shift]}}
+;     :any_control_key {:any :key_code :modi {:mandatory [:left_control :right_control]}}
+;     :any_command_key {:any :key_code :modi {:mandatory [:left_command :right_command]}}
+; }
+
 ;; layers are basically "hyper" keys
 ;; press this in combination with something else and depending on your rule, make things happen
 :layers {
     :hyper-mode {:key :caps_lock :alone {:key :escape}} ;; make the caps_lock key the hyper key
                                                         ;; In "System Preferences/Keyboard/Modifier Keys..."
                                                         ;; the Caps Lock Key is set to "No Action".
+    :slash-mode {:key :slash}                           ;; '/' + vowel = acute accent
+    :semicolon-mode {:key :semicolon}                   ;; ';' + vowel = umlaut
+    :backslash-mode {:key :backslash}                   ;; '\' + vowel = grave accent
+    :6-mode {:key :6}                                   ;; '6' + vowel = circumflex
 } ;; layers
 
 ;; simlayers are basically "hyper" keys
@@ -94,10 +105,6 @@
     :e-mode {:key :e}                                   ;; make the e-key a simlayer key
     :o-mode {:key :o}                                   ;; make the o-key a simlayer key
     :space-mode {:key :spacebar}                        ;; make the spacebar a simlayer key
-    :slash-mode {:key :slash}                           ;; '/' + vowel = acute accent
-    :semicolon-mode {:key :semicolon}                   ;; ';' + vowel = umlaut
-    :backslash-mode {:key :backslash}                   ;; '\' + vowel = grave accent
-    :6-mode {:key :6}                                   ;; '6' + vowel = circumflex
 } ;; simlayers
 
 ;; Define different kinds of keyboards
@@ -272,7 +279,7 @@
     {:des "o-key shortcuts (example)"                   ; Hold 'o' + extra key
      :rules [ :o-mode
         [:s [:open "Safari"]]                           ; 's' - Open Safari
-        [:t [[:type "Moi,oet Grunn!"]]]                 ; 't' - Type some text
+        [:t [:type "Moi,oet Grunn!"]]                   ; 't' - Type some text
         [:b [:beep]]                                    ; 'b' - beep
         [:p [:purr]]                                    ; 'p' - play "Purr"
         [:k [:tink]]                                    ; 'k' - play "Tink"
@@ -290,28 +297,60 @@
     }
 
     ;; Special 'vowel' characters, '/', ';' and '\' are easy to remember as shortcut keys
-    {:des "Special 'vowel' characters - '/' for acute accent and ';' for umlaut, '\\' for grave accent and '6' for circumflex."
+    {:des "Lowercase diacritic characters - '/' for acute accent and ';' for umlaut, '\\' for grave accent and '6' for circumflex. Example: 'slash' + 'a' = á"
      :rules [
-        [:a [:!Oe :a] [:slash-mode]]                    ; '/' + a = á
-        [:e [:!Oe :e] [:slash-mode]]                    ; '/' + e = é
-        [:i [:!Oe :i] [:slash-mode]]                    ; '/' + i = í
-        [:o [:!Oe :o] [:slash-mode]]                    ; '/' + o = ó
-        [:u [:!Oe :u] [:slash-mode]]                    ; '/' + u = ú
-        [:a [:!Ou :a] [:semicolon-mode]]                ; ';' + a = ä
-        [:e [:!Ou :e] [:semicolon-mode]]                ; ';' + e = ë
-        [:i [:!Ou :i] [:semicolon-mode]]                ; ';' + i = ï
-        [:o [:!Ou :o] [:semicolon-mode]]                ; ';' + o = ö
-        [:u [:!Ou :u] [:semicolon-mode]]                ; ';' + u = ü
+        [:a [:!Oe :a] [:slash-mode]]                          ; '/' + a = á
+        [:e [:!Oe :e] [:slash-mode]]                          ; '/' + e = é
+        [:i [:!Oe :i] [:slash-mode]]                          ; '/' + i = í
+        [:o [:!Oe :o] [:slash-mode]]                          ; '/' + o = ó
+        [:u [:!Oe :u] [:slash-mode]]                          ; '/' + u = ú
+
+        [:a [:!Ou :a] [:semicolon-mode]]                      ; ';' + a = ä
+        [:e [:!Ou :e] [:semicolon-mode]]                      ; ';' + e = ë
+        [:i [:!Ou :i] [:semicolon-mode]]                      ; ';' + i = ï
+        [:o [:!Ou :o] [:semicolon-mode]]                      ; ';' + o = ö
+        [:u [:!Ou :u] [:semicolon-mode]]                      ; ';' + u = ü
+
         [:a [:!Ograve_accent_and_tilde :a] [:backslash-mode]] ; '\' + a = à
-        [:e [:!Ograve_accent_and_tilde :e] [:backslash-mode]] ; '\' + e = à
+        [:e [:!Ograve_accent_and_tilde :e] [:backslash-mode]] ; '\' + e = è
         [:i [:!Ograve_accent_and_tilde :i] [:backslash-mode]] ; '\' + i = ì
         [:o [:!Ograve_accent_and_tilde :o] [:backslash-mode]] ; '\' + o = ò
         [:u [:!Ograve_accent_and_tilde :u] [:backslash-mode]] ; '\' + u = ù
-        [:a [:!Oi :a] [:6-mode]]                        ; '/' + a = â
-        [:e [:!Oi :e] [:6-mode]]                        ; '/' + e = ê
-        [:i [:!Oi :i] [:6-mode]]                        ; '/' + i = î
-        [:o [:!Oi :o] [:6-mode]]                        ; '/' + o = ô
-        [:u [:!Oi :u] [:6-mode]]                        ; '/' + u = û
+
+        [:a [:!Oi :a] [:6-mode]]                              ; '/' + a = â
+        [:e [:!Oi :e] [:6-mode]]                              ; '/' + e = ê
+        [:i [:!Oi :i] [:6-mode]]                              ; '/' + i = î
+        [:o [:!Oi :o] [:6-mode]]                              ; '/' + o = ô
+        [:u [:!Oi :u] [:6-mode]]                              ; '/' + u = û
+     ]
+    }
+
+    ;; Special 'vowel' characters, '/', ';' and '\' are easy to remember as shortcut keys
+    {:des "Uppercase diacritic characters - '/' for acute accent and ';' for umlaut, '\\' for grave accent and '6' for circumflex. Example: 'slash' + ['shift' + 'a'] = Á"
+     :rules [
+        [{:key :a :modi :shift} [:!Oe :!Sa] [:slash-mode]]     ; '/' + a = Á
+        [{:key :e :modi :shift} [:!Oe :!Se] [:slash-mode]]     ; '/' + e = É
+        [{:key :i :modi :shift} [:!Oe :!Si] [:slash-mode]]     ; '/' + i = Í
+        [{:key :o :modi :shift} [:!Oe :!So] [:slash-mode]]     ; '/' + o = Ó
+        [{:key :u :modi :shift} [:!Oe :!Su] [:slash-mode]]     ; '/' + u = Ú
+
+        [{:key :a :modi :shift} [:!Ou :!Sa] [:semicolon-mode]] ; ';' + a = Ä
+        [{:key :e :modi :shift} [:!Ou :!Se] [:semicolon-mode]] ; ';' + e = Ë
+        [{:key :i :modi :shift} [:!Ou :!Si] [:semicolon-mode]] ; ';' + i = Ï
+        [{:key :o :modi :shift} [:!Ou :!So] [:semicolon-mode]] ; ';' + o = Ö
+        [{:key :u :modi :shift} [:!Ou :!Su] [:semicolon-mode]] ; ';' + u = Ü
+
+        [{:key :a :modi :shift} [:!Ograve_accent_and_tilde :!Sa] [:backslash-mode]] ; '\' + a = À
+        [{:key :e :modi :shift} [:!Ograve_accent_and_tilde :!Se] [:backslash-mode]] ; '\' + e = È
+        [{:key :i :modi :shift} [:!Ograve_accent_and_tilde :!Si] [:backslash-mode]] ; '\' + i = Ì
+        [{:key :o :modi :shift} [:!Ograve_accent_and_tilde :!So] [:backslash-mode]] ; '\' + o = Ò
+        [{:key :u :modi :shift} [:!Ograve_accent_and_tilde :!Su] [:backslash-mode]] ; '\' + u = Ù
+
+        [{:key :a :modi :shift} [:!Oi :!Sa] [:6-mode]]         ; '/' + a = Â
+        [{:key :e :modi :shift} [:!Oi :!Se] [:6-mode]]         ; '/' + e = Ê
+        [{:key :i :modi :shift} [:!Oi :!Si] [:6-mode]]         ; '/' + i = Î
+        [{:key :o :modi :shift} [:!Oi :!So] [:6-mode]]         ; '/' + o = Ò
+        [{:key :u :modi :shift} [:!Oi :!Su] [:6-mode]]         ; '/' + u = Ù
      ]
     }
 
@@ -335,6 +374,7 @@
         [:v [:open "VSCodium"]]                         ; 'v' - Open VSCodium
         [:4 [:screen_capture_clipboard]]                ; '4' - Silent screenshot to clipboard [:!TSC4]
         [:5 [:!SC5]]                                    ; '5' - Screenshot and recording options
+        [:r [:hammerspoon "reloadConfig"]]              ; Reload Hammerspoon config
      ]
     }
 
