@@ -105,6 +105,7 @@
     :e-mode {:key :e}                                   ;; make the e-key a simlayer key
     :o-mode {:key :o}                                   ;; make the o-key a simlayer key
     :space-mode {:key :spacebar}                        ;; make the spacebar a simlayer key
+    :hammer-mode {:key :h}                              ;;
 } ;; simlayers
 
 ;; Define different kinds of keyboards
@@ -374,6 +375,7 @@
         [:v [:open "VSCodium"]]                         ; 'v' - Open VSCodium
         [:4 [:screen_capture_clipboard]]                ; '4' - Silent screenshot to clipboard [:!TSC4]
         [:5 [:!SC5]]                                    ; '5' - Screenshot and recording options
+        [:d [:open "Dictionary"]]                       ; 'd' - Look up in Dictionary
         [:r [:hammerspoon "reloadConfig"]]              ; Reload Hammerspoon config
      ]
     }
@@ -460,6 +462,16 @@
      ]
     }
 
+    {:des "Hammerspoon shortcuts"                       ; Hold 'h' + extra key
+     :rules [ :hammer-mode
+        [:m [:hammerspoon "showMouse"]]                 ; 'm'
+        [:t [:hammerspoon "toggleMic"]]                 ; 't'
+        [:n [:hammerspoon "translate_NL_to_EN"]]        ; 'n'
+        [:e [:hammerspoon "translate_EN_to_NL"]]        ; 'e'
+        [:d [:hammerspoon "translate_DE_to_NL"]]        ; 'd'
+     ]
+    }
+
 ] ;; main
 
-} ;; EOF
+} ;; EOFh
