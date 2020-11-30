@@ -462,7 +462,7 @@
      ]
     }
 
-    {:des "Hammerspoon shortcuts"                       ; Hold 'h' + extra key
+    {:des "Hammerspoon shortcuts via UrlEvents"         ; Hold 'h' + extra key
      :rules [ :hammer-mode
         [:m [:hammerspoon "showMouse"]]                 ; 'm'
         [:t [:hammerspoon "toggleMic"]]                 ; 't'
