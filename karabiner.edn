@@ -79,13 +79,6 @@
     :typora ["^abnerworks\\.Typora$"]
 }
 
-; :froms {
-;     :anykey {:any :key_code :modi {:optional [:any]}}
-;     :any_shift_key {:any :key_code :modi {:mandatory [:left_shift :right_shift]}}
-;     :any_control_key {:any :key_code :modi {:mandatory [:left_control :right_control]}}
-;     :any_command_key {:any :key_code :modi {:mandatory [:left_command :right_command]}}
-; }
-
 ;; layers are basically "hyper" keys
 ;; press this in combination with something else and depending on your rule, make things happen
 :layers {
@@ -105,7 +98,7 @@
     :e-mode {:key :e}                                   ;; make the e-key a simlayer key
     :o-mode {:key :o}                                   ;; make the o-key a simlayer key
     :space-mode {:key :spacebar}                        ;; make the spacebar a simlayer key
-    :hammer-mode {:key :h}                              ;;
+    :hammer-mode {:key :h}                              ;; make the h-key a Hammerspoon eventhandler key
 } ;; simlayers
 
 ;; Define different kinds of keyboards
@@ -242,32 +235,6 @@
      ]
     }
 
-    ; ;; Use the left and right shift-key to move the cursor one word left or right.
-    ; ;; [disabled it for now, I made too many typing mistakes due to it...]
-    ; {:des "Left- and right- shiftkeys: move the cursor one word"
-    ;  :rules [
-    ;     [:##left_shift :left_shift nil {:alone :!Oleft_arrow }]
-    ;     [:##right_shift :right_shift nil {:alone :!Eright_arrow}]
-    ;  ]
-    ; }
-
-    ; ;; Use the left and right shift-key simultaneously to activate capslock.
-    ; ;; [disabled, does not work with the capslock as hyper-key]
-    ; {:des "Left- and right- shiftkeys simultaneously to toggle capslock"
-    ;  :rules [
-    ;     [[:left_shift :right_shift] [:caps_lock]]
-    ;  ]
-    ; }
-
-    ; ;; Use the left-most bottom row key as 'escape' key.
-    ; ;; [experimental work-in-progress]
-    ; {:des "Left-most bottom row key as 'escape' key"
-    ;  :rules [
-    ;    ; [:##left_control :left_control nil {:alone :escape}]  ; left-control to escape for Qisan Magicforce keyboards
-    ;     [:##fn :fn nil {:alone :escape}]                ; function key for MacBook Pro keyboards
-    ;  ]
-    ; }
-
     ;; Use e-key key to launch apps or actions
     {:des "e-key shortcuts"                             ; Hold 'e' + extra key
      :rules [ :e-mode
@@ -280,20 +247,28 @@
     {:des "o-key shortcuts (example)"                   ; Hold 'o' + extra key
      :rules [ :o-mode
         [:s [:open "Safari"]]                           ; 's' - Open Safari
-        [:t [:type "Moi,oet Grunn!"]]                   ; 't' - Type some text
+        [:m [:type "Moi,oet Grunn!"]]                   ; 'm' - Type some text
         [:b [:beep]]                                    ; 'b' - beep
         [:p [:purr]]                                    ; 'p' - play "Purr"
-        [:k [:tink]]                                    ; 'k' - play "Tink"
+        [:t [:tink]]                                    ; 't' - play "Tink"
+        [:a ["say 'You are awesome!'"]]
+        [:f ["osascript -e 'tell app \"Finder\" to make new Finder window'"]]
+        [:h ["osascript -e 'display dialog \"Hello from Karabiner-elements\" with title \"The title!\"'"]]
      ]
     }
 
     ;; Use spacebar to launch apps or actions
     ;; Mostly as example
-    {:des "Spacebar shortcuts (example)"                ; Hold 'space' + extra key
+    {:des "Spacebar shortcuts"                          ; Hold 'space' + extra key
      :rules [ :space-mode
-        [:slash [:openFinder]]                          ; '/' - Open Finder
+        [:e [:!TCspacebar]]                             ; 'e' - Emoji picker
         [:f [:openFinder]]                              ; 'f' - Open Finder
         [:p [:open "Preview"]]                          ; 'p' - Open Preview
+        [:k [:open "Kitty"]]                            ; 'k' - Open Kitty
+        [:m [:hammerspoon "showMouse"]]                 ; 'm' - Show the mouse cursor
+        [:t [:open "Typora"]]                           ; 't' - Open Typora
+        [:s [:open "Scapple"]]                          ; 's' - Open Scapple
+        [:o [:applescript "Open in VSCodium.scpt"] :finder] ; 'o' - Finder specific, open file or folder in VSCodium
      ]
     }
 
@@ -360,7 +335,7 @@
      :rules [ :hyper-mode
         [:l [:!CTq]]                                    ; 'l' - Lock Screen (Command-Control-Q)
         [:z [:!COeject]]                                ; 'z' - Sleep (Command-Option-Eject)
-        [:m [:!TCspacebar]]                             ; 'm' - Emoji picker
+        [:e [:!TCspacebar]]                             ; 'e' - Emoji picker
         [:o [:applescript "Open in VSCodium.scpt"] :finder] ; 'o' - Finder specific, open file or folder in VSCodium
         [:u [[:notification "🔕" "UI Sound effects off"] [:ui_audio_enabled "0"] ["audio_off" 1]] :!audio_off]
         [:u [[:notification "🔔" "UI Sound effects on"] [:ui_audio_enabled "1"] ["audio_off" 0]] :audio_off]
@@ -376,7 +351,6 @@
         [:4 [:screen_capture_clipboard]]                ; '4' - Silent screenshot to clipboard [:!TSC4]
         [:5 [:!SC5]]                                    ; '5' - Screenshot and recording options
         [:d [:open "Dictionary"]]                       ; 'd' - Look up in Dictionary
-        [:r [:hammerspoon "reloadConfig"]]              ; Reload Hammerspoon config
      ]
     }
 
@@ -419,10 +393,6 @@
     {:des "Safari: run script to save tabs to markdown (left-option + 'o')"
      :rules [ :safari
         [:!Os [:applescript "SaveSafariTabsToMarkdown.scpt"]]
-                                                        ; Examples of other possible functions
-        [:!Oa "say 'now we are in Safari'"]
-        [:!Of ["osascript -e 'tell app \"Finder\" to make new Finder window'"]]
-        [:!Oh ["osascript -e 'display dialog \"Hello from Karabiner-elements\" with title \"This must be Safari!\"'"]]
      ]
     }
 
@@ -469,6 +439,7 @@
         [:n [:hammerspoon "translate_NL_to_EN"]]        ; 'n'
         [:e [:hammerspoon "translate_EN_to_NL"]]        ; 'e'
         [:d [:hammerspoon "translate_DE_to_NL"]]        ; 'd'
+        [:r [:hammerspoon "reloadConfig"]]              ; Reload Hammerspoon config
      ]
     }
 
