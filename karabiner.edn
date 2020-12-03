@@ -264,6 +264,7 @@
         [:e [:!TCspacebar]]                             ; 'e' - Emoji picker
         [:f [:openFinder]]                              ; 'f' - Open Finder
         [:p [:open "Preview"]]                          ; 'p' - Open Preview
+        [:i [:open "iTerm"]]                            ; 'i' - Open iTerm2
         [:k [:open "Kitty"]]                            ; 'k' - Open Kitty
         [:m [:hammerspoon "showMouse"]]                 ; 'm' - Show the mouse cursor
         [:t [:open "Typora"]]                           ; 't' - Open Typora
