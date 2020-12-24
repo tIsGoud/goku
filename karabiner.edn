@@ -97,6 +97,7 @@
 :simlayers {
     :e-mode {:key :e}                                   ;; make the e-key a simlayer key
     :o-mode {:key :o}                                   ;; make the o-key a simlayer key
+    ;:v-mode {:key :v}                                   ;; make the v-key a simlayer key
     :space-mode {:key :spacebar}                        ;; make the spacebar a simlayer key
     :hammer-mode {:key :h}                              ;; make the h-key a Hammerspoon eventhandler key
 } ;; simlayers
@@ -331,7 +332,7 @@
      ]
     }
 
-    ;; Use caps_lock key to launch apps or actions
+    ;; Use hyper key to launch apps or actions
     {:des "Hyper-mode shortcuts"                        ; Hold 'caps_lock' + extra key
      :rules [ :hyper-mode
         [:l [:!CTq]]                                    ; 'l' - Lock Screen (Command-Control-Q)
@@ -352,6 +353,15 @@
         [:4 [:screen_capture_clipboard]]                ; '4' - Silent screenshot to clipboard [:!TSC4]
         [:5 [:!SC5]]                                    ; '5' - Screenshot and recording options
         [:d [:open "Dictionary"]]                       ; 'd' - Look up in Dictionary
+     ]
+    }
+
+    ;; Use hyper key to change the volume
+    {:des "Volume increment and decrement with 'hyper' key and '0', '-' or '+' to mute, decrease or increase volume"
+     :rules [ :hyper-mode
+        [:0 [:mute]]                                    ; 'v' + '0' mute volume
+        [:hyphen [:volume_decrement]]                   ; 'v' + '-' decrement volume
+        [:equal_sign [:volume_increment]]               ; 'v' + '+' increment volume
      ]
     }
 
@@ -429,7 +439,7 @@
     {:des "Typora shortcuts"                            ; Hold 'caps_lock' + extra key
      :rules [ :hyper-mode
         [:b [:!SCl] :typora]                            ; 'b' - Toggle sidebar
-        [:h [:snippet "hugo_frontmatter.txt"] :typora]  ; 'h' - Copy snippet to clipboard
+        [:h [[:notification "Hugo frontmatter copied to clipboard" "Clipboard"] [:snippet "hugo_frontmatter.txt"]] :typora]  ; 'h' - Copy snippet to clipboard
      ]
     }
 
