@@ -77,6 +77,7 @@
            "^com\\.microsoft\\.VSCode(Insiders)?$"
            "^com\\.microsoft\\.VSCode?$"]
     :typora ["^abnerworks\\.Typora$"]
+    :notes ["^com\\.apple\\.Notes$"]
 }
 
 ;; layers are basically "hyper" keys
@@ -269,7 +270,8 @@
         [:k [:open "Kitty"]]                            ; 'k' - Open Kitty
         [:m [:hammerspoon "showMouse"]]                 ; 'm' - Show the mouse cursor
         [:t [:open "Typora"]]                           ; 't' - Open Typora
-        [:s [:open "Scapple"]]                          ; 's' - Open Scapple
+        [:c [:open "Scapple"]]                          ; 'c' - Open Scapple
+        [:s [:open "Safari"]]                           ; 's' - Open Safari
         [:o [:applescript "Open in VSCodium.scpt"] :finder] ; 'o' - Finder specific, open file or folder in VSCodium
      ]
     }
@@ -329,30 +331,6 @@
         [{:key :i :modi :shift} [:!Oi :!Si] [:6-mode]]         ; '/' + i = Î
         [{:key :o :modi :shift} [:!Oi :!So] [:6-mode]]         ; '/' + o = Ò
         [{:key :u :modi :shift} [:!Oi :!Su] [:6-mode]]         ; '/' + u = Ù
-     ]
-    }
-
-    ;; Use hyper key to launch apps or actions
-    {:des "Hyper-mode shortcuts"                        ; Hold 'caps_lock' + extra key
-     :rules [ :hyper-mode
-        [:l [:!CTq]]                                    ; 'l' - Lock Screen (Command-Control-Q)
-        [:z [:!COeject]]                                ; 'z' - Sleep (Command-Option-Eject)
-        [:e [:!TCspacebar]]                             ; 'e' - Emoji picker
-        [:o [:applescript "Open in VSCodium.scpt"] :finder] ; 'o' - Finder specific, open file or folder in VSCodium
-        [:u [[:notification "🔕" "UI Sound effects off"] [:ui_audio_enabled "0"] ["audio_off" 1]] :!audio_off]
-        [:u [[:notification "🔔" "UI Sound effects on"] [:ui_audio_enabled "1"] ["audio_off" 0]] :audio_off]
-        [:slash [:openFinder]]                          ; '/' - Open Finder
-        [:p [:open "Preview"]]                          ; 'p' - Open Preview
-        [:s [:open "Safari"]]                           ; 's' - Open Safari
-        [:f [:open "Firefox Developer Edition"]]        ; 'f' - Open Firefox
-        [:k [:open "Kubernetic"]]                       ; 'k' - Open Kubernetic
-        [:g [:open "Google Chrome"]]                    ; 'g' - Open Google Chrome
-        [:t [:open "iTerm"] [:!code]]                   ; 't' - Open iTerm 'console' or 'commandline'
-        [:y [:open "Typora"]]                           ; 'y' - Open Typora
-        [:v [:open "VSCodium"]]                         ; 'v' - Open VSCodium
-        [:4 [:screen_capture_clipboard]]                ; '4' - Silent screenshot to clipboard [:!TSC4]
-        [:5 [:!SC5]]                                    ; '5' - Screenshot and recording options
-        [:d [:open "Dictionary"]]                       ; 'd' - Look up in Dictionary
      ]
     }
 
@@ -425,21 +403,24 @@
     }
 
     ;; Use caps_lock key to launch apps or actions in VSCode/VSCodium
-    ;; When the same keycode is used as general rule/shortcut, '!code' is required on the original rule
     {:des "VSCode/VSCodium shortcuts"                   ; Hold 'caps_lock' + extra key
      :rules [ :hyper-mode
-        [:b [:!Cb] :code]                               ; 'b' - Toggle sidebar, interferes with Command-b used in markdown
         [:t [:!TSgrave_accent_and_tilde] :code]         ; 't' - Open terminal
         [:h [:snippet "hugo_frontmatter.txt"] :code]    ; 'h' - Copy snippet to clipboard
      ]
     }
 
     ;; Use caps_lock key to launch apps or actions in VSCode/VSCodium
-    ;; When the same keycode is used as general rule/shortcut, '!code' is required on the original rule
     {:des "Typora shortcuts"                            ; Hold 'caps_lock' + extra key
      :rules [ :hyper-mode
-        [:b [:!SCl] :typora]                            ; 'b' - Toggle sidebar
         [:h [[:notification "Hugo frontmatter copied to clipboard" "Clipboard"] [:snippet "hugo_frontmatter.txt"]] :typora]  ; 'h' - Copy snippet to clipboard
+     ]
+    }
+
+    ;; Use caps_lock key to launch apps or actions in VSCode/VSCodium
+    {:des "Notepad shortcuts"                           ; Hold 'caps_lock' + extra key
+     :rules [ :hyper-mode
+        [:s [:!OCs] :notes]                             ; 's' - Toggle sidebar
      ]
     }
 
@@ -451,6 +432,36 @@
         [:e [:hammerspoon "translate_EN_to_NL"]]        ; 'e'
         [:d [:hammerspoon "translate_DE_to_NL"]]        ; 'd'
         [:r [:hammerspoon "reloadConfig"]]              ; Reload Hammerspoon config
+     ]
+    }
+
+    ;; Use hyper key to launch apps or actions
+    {:des "Global Hyper-mode shortcuts"                 ; Hold 'caps_lock' + extra key
+     :rules [ :hyper-mode
+        [:l [:!CTq]]                                    ; 'l' - Lock Screen (Command-Control-Q)
+        [:z [:!COeject]]                                ; 'z' - Sleep (Command-Option-Eject)
+        [:e [:!TCspacebar]]                             ; 'e' - Emoji picker
+        [:o [:applescript "Open in VSCodium.scpt"] :finder] ; 'o' - Finder specific, open file or folder in VSCodium
+        [:u [[:notification "🔕" "UI Sound effects off"] [:ui_audio_enabled "0"] ["audio_off" 1]] :!audio_off]
+        [:u [[:notification "🔔" "UI Sound effects on"] [:ui_audio_enabled "1"] ["audio_off" 0]] :audio_off]
+        [:slash [:openFinder]]                          ; '/' - Open Finder
+        [:p [:open "Preview"]]                          ; 'p' - Open Preview
+        [:a [:open "Safari"]]                           ; 'a' - Open Safari
+        [:f [:open "Firefox Developer Edition"]]        ; 'f' - Open Firefox
+        [:k [:open "Kubernetic"]]                       ; 'k' - Open Kubernetic
+        [:g [:open "Google Chrome"]]                    ; 'g' - Open Google Chrome
+        [:t [:open "iTerm"]]                            ; 't' - Open iTerm 'console' or 'commandline'
+        [:y [:open "Typora"]]                           ; 'y' - Open Typora
+        [:v [:open "VSCodium"]]                         ; 'v' - Open VSCodium
+        [:s [:!Cb] :code]                               ; 's' - Toggle sidebar
+        [:s [:!OCs] :notes]                             ; 's' - Toggle sidebar
+        [:s [:!SCl] :safari]                            ; 's' - Toggle sidebar
+        [:s [:!SCl] :typora]                            ; 's' - Toggle sidebar
+        [:1 [:screen_capture_clipboard]]                ; '1' - Silent screenshot to clipboard [:!TSC4]
+        [:2 [:!SC2]]                                    ; '2' - OCR Screenshot with TextSniper, default shortcut
+        [:4 [:screen_capture_clipboard]]                ; '4' - Silent screenshot to clipboard [:!TSC4]
+        [:5 [:!SC5]]                                    ; '5' - Screenshot and recording options
+        [:d [:open "Dictionary"]]                       ; 'd' - Look up in Dictionary
      ]
     }
 
