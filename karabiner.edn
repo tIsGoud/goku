@@ -78,6 +78,7 @@
            "^com\\.microsoft\\.VSCode?$"]
     :typora ["^abnerworks\\.Typora$"]
     :notes ["^com\\.apple\\.Notes$"]
+    :fusion ["^com\\.apple\\.fusion$"]
 }
 
 ;; layers are basically "hyper" keys
@@ -216,11 +217,20 @@
      ]
     }
 
+    ;; Special VMware Fusion keys
+    {:des "Fusion shortcuts"
+     :rules [ :fusion
+        [:!Cright_arrow [:end]]                         ; 's' - Toggle sidebar
+        [:!Cleft_arrow [:home]]                         ; 's' - Toggle sidebar
+        [:!Cb [:!OF4]]                                  ; 's' - Toggle sidebar
+     ]
+    }
+
     ;; Shortcut `command` for command+tab to switch between the current and previous application
     ;; Shortcut `option` for command+tilde to cycle through the open windows of an application
     ;; Shortcut `control` for control+tab to go to the next tab in most applications
     ;; Due to the switched left-option and -command on the Magicforce keyboard, two rules are excluded.
-    ;; Functonality for the left-option and left-command is handled in the Magicforce specific rules.
+    ;; Functionality for the left-option and left-command is handled in the Magicforce specific rules.
     ;; Command-tab s not implemented in the same way across applications. This results either in looping
     ;; through the tabs or toggling between two tabs. To create the same experience everywhere specific
     ;; sequences need to be build. For VSCodium I experimented with with Ctrl+tab twice.
